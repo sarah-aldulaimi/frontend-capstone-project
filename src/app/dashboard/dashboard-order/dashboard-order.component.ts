@@ -8,7 +8,7 @@ import { OrderService } from 'src/app/shared/service/order.service';
   styleUrls: ['./dashboard-order.component.scss']
 })
 export class DashboardOrderComponent implements OnInit {
-  orders: Orders | undefined;
+  orders: Orders[] | undefined;
 
   constructor(private orderService: OrderService) {}
 
@@ -93,6 +93,7 @@ export class DashboardOrderComponent implements OnInit {
   public getOrders(): void {
     this.orderService.getAllOrders().subscribe((res: Orders[]) => {
       console.log(res);
+      this.orders = res;
     });
   }
 }

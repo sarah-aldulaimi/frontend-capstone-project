@@ -5,7 +5,7 @@
       <thead>
         <tr class="border text-left">
           <th>
-            <span class="text-gray-800">Id</span>
+            <span class="text-gray-800">Order Number</span>
           </th>
           <th>
             <span class="text-gray-800">Name</span>
@@ -15,7 +15,7 @@
           </th>
 
           <th>
-            <span class="text-gray-800">Created</span>
+            <span class="text-gray-800">Total Products</span>
           </th>
 
           <th>
@@ -27,21 +27,21 @@
       <tbody>
         <tr *ngFor="let order of orders" class="border">
           <td>
-            <a class="text-primary" href="/">#{{ order?.id }}</a>
+            <a class="text-primary" href="/">#{{ order?.orderNumber }}</a>
           </td>
           <td>
             {{ order?.orderBy | titlecase }}
           </td>
           <td>
-            <span>${{ order?.price }}</span>
+            <span>${{ order?.totalCost }}</span>
           </td>
           <td>
-            <span>{{ order?.created }}</span>
+            <span>{{ order?.productCount }}</span>
           </td>
           <td>
             <div
               [ngClass]="{
-                'bg-blue-500 text-blue-500': order?.status === 'complated',
+                'bg-blue-500 text-blue-500': order?.status === 'completed',
                 'bg-red-500 text-red-500': order?.status === 'rejected',
                 'bg-yellow-500 text-yellow-900': order?.status === 'pending',
                 'bg-primary text-primary': order?.status === 'initialized'

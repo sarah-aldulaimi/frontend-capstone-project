@@ -21,6 +21,10 @@ const DashboardChildrenRoute: Routes = [
     component: DashboardProfileComponent
   },
   {
+    path: 'profile/:id',
+    component: DashboardProfileComponent
+  },
+  {
     path: 'orders',
     component: DashboardOrderComponent
   }

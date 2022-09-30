@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { productsDB } from '../../shared/data/products';
+import { Category } from 'src/app/shared/data/category';
+import { CategoryService } from 'src/app/shared/service/category.service';
+import { ProductService } from 'src/app/shared/service/product.service';
+import { Products } from '../../shared/data/products';
 
 @Component({
   selector: 'll-product-list',
@@ -9,13 +12,25 @@ import { productsDB } from '../../shared/data/products';
 export class ProductListComponent implements OnInit {
   isLoaded: boolean;
   advanceSearchExpanded: boolean = false;
-  products = [];
-  constructor() {}
+  products: Products[] | undefined;
+  categories: Category[] | undefined;
+  constructor(private productService: ProductService, private categoryService: CategoryService) {}
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.products = productsDB.Product;
-      this.isLoaded = true
-    }, 8000)
+    this.getAllProducts();
+  }
+
+  public getAllProducts(): void {
+    this.productService.getAllProducts().subscribe((res: Products[]) => {
+      console.log(res);
+      this.products = res;
+    });
+  }
+
+  public displayCategories(): void {
+    this.categoryService.getAllCategories().subscribe((res: Category[]) => {
+      console.log(res);
+      this.categories = res;
+    });
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { productsDB } from '../../shared/data/products'; 
+import { Products } from '../../shared/data/products';
 @Component({
   selector: 'll-home-products',
   templateUrl: './home-products.component.html',
@@ -7,10 +7,7 @@ import { productsDB } from '../../shared/data/products';
 })
 export class HomeProductsComponent implements OnInit {
   products = [];
-  constructor() { 
-    this.products = productsDB.Product
-  }
+  constructor() {}
 
-  ngOnInit(): void { }
-
+  ngOnInit(): void {}
 }

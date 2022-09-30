@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { productsDB } from 'src/app/shared/data/products';
+import { Products } from 'src/app/shared/data/products';
 
 @Component({
   selector: 'll-dashboard-saved-item',
@@ -9,10 +9,8 @@ import { productsDB } from 'src/app/shared/data/products';
 export class DashboardSavedItemComponent implements OnInit {
   view = 'list';
 
-  products;
+  products: Products[] | undefined;
   constructor() {}
 
-  ngOnInit(): void {
-    this.products = productsDB.Product;
-  }
+  ngOnInit(): void {}
 }

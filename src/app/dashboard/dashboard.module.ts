@@ -21,4 +21,6 @@ import { DashboardOrderComponent } from './dashboard-order/dashboard-order.compo
   ],
   imports: [CommonModule, DashboardRoutingModule, SharedModule, MatMenuModule]
 })
-export class DashboardModule {}
+export class DashboardModule {
+  orderID: number;
+}

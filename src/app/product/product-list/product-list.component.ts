@@ -13,11 +13,13 @@ export class ProductListComponent implements OnInit {
   isLoaded: boolean;
   advanceSearchExpanded: boolean = false;
   products: Products[] | undefined;
+  filteredProducts: Products[] | undefined;
   categories: Category[] | undefined;
   constructor(private productService: ProductService, private categoryService: CategoryService) {}
 
   ngOnInit(): void {
     this.getAllProducts();
+    this.getAllCategories();
   }
 
   public getAllProducts(): void {
@@ -27,10 +29,18 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  public displayCategories(): void {
+  public getAllCategories(): void {
     this.categoryService.getAllCategories().subscribe((res: Category[]) => {
       console.log(res);
       this.categories = res;
     });
+  }
+
+  public filterProducts(categoryID: number): void {
+    for (var product of this.products) {
+      if (product.categoryID == categoryID) {
+        this.filteredProducts.push(product);
+      }
+    }
   }
 }

@@ -20,7 +20,7 @@
         </div>
       </div>
       <mat-expansion-panel [expanded]="advanceSearchExpanded">
-        <div class="grid grid-cols-6 gap-6 mt-4">
+        <div id="search" class="grid grid-cols-6 gap-6 mt-4">
           <div class="col-span-6 sm:col-span-3">
             <input
               type="text"
@@ -74,13 +74,12 @@
                 sm:text-sm
               "
             >
-              <option>Category</option>
-              <option>Microservices</option>
-              <option>Shipping Service</option>
-              <option>Consulting</option>
+              <option *ngFor="let category of categories" value="{{ category.id }}">
+                {{ category.name }}
+              </option>
             </select>
           </div>
-          <div class="col-span-6 sm:col-span-3">
+          <!-- <div class="col-span-6 sm:col-span-3">
             <select
               name="rating"
               class="
@@ -106,9 +105,9 @@
               <option>4</option>
               <option>5</option>
             </select>
-          </div>
+          </div> -->
           <div class="col-span-6">
-            <button mat-flat-button color="accent">Apply filter</button>
+            <button type="submit" mat-flat-button color="accent">Apply filter</button>
           </div>
         </div>
       </mat-expansion-panel>

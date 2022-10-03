@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardIndexComponent } from './dashboard-index/dashboard-index.component';
 import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.component';
 import { DashboardOrderComponent } from './dashboard-order/dashboard-order.component';
+import { DashboardOrderDetailsComponent } from './dashboard-order/dashboard-order-details/dashboard-order-details.component';
 import { DashboardProfileComponent } from './dashboard-profile/dashboard-profile.component';
 import { DashboardSavedItemComponent } from './dashboard-saved-item/dashboard-saved-item.component';
 
@@ -27,6 +28,10 @@ const DashboardChildrenRoute: Routes = [
   {
     path: 'orders',
     component: DashboardOrderComponent
+  },
+  {
+    path: 'orders/:id',
+    component: DashboardOrderDetailsComponent
   }
 ];
 

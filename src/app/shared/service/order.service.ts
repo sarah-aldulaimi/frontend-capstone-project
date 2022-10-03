@@ -7,7 +7,7 @@ import { Orders } from '../data/orders';
   providedIn: 'root'
 })
 export class OrderService {
-  baseURL: string = 'http://localhost:8080/orders';
+  baseURL: string = 'http://localhost:8080/orders/';
   constructor(private http: HttpClient) {}
 
   public getAllOrders(): Observable<Orders[]> {

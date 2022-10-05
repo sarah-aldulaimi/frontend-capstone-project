@@ -24,7 +24,9 @@
         <mat-icon>menu</mat-icon>
       </button>
       <div class="hidden items-center md:flex ml-auto">
-        <a style="margin-left: 20px" [routerLink]="['/shopping-cart']"><img src="/assets/images/shop.png" /></a>
+        <a style="margin-left: 20px" [routerLink]="['dashboard/shopping-cart']"
+          ><img src="/assets/images/shop.png"
+        /></a>
         <a [routerLink]="['/auth/login']" mat-raised-button color="warn" class="text-lg font-bold py-2 px-5">Login</a>
         <a [routerLink]="['/auth/signup']" mat-raised-button color="accent" class="text-lg font-bold py-2 px-5 ml-2"
           >Join Now</a

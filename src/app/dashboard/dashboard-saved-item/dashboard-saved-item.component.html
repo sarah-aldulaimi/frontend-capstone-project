@@ -1,9 +1,13 @@
 <div>
   <div class="filter flex items-center mb-5">
-    <h5>Favorite products</h5>
+    <h5>Shopping Cart</h5>
     <div class="flex items-center ml-auto">
-      <button [class.text-accent]="view === 'grid'" (click)="view = 'grid'" mat-icon-button class="view__btn"><mat-icon>grid_view</mat-icon></button>
-      <button [class.text-accent]="view === 'list'" (click)="view = 'list'" mat-icon-button class="view__btn"><mat-icon>list_alt</mat-icon></button>
+      <button [class.text-accent]="view === 'grid'" (click)="view = 'grid'" mat-icon-button class="view__btn">
+        <mat-icon>grid_view</mat-icon>
+      </button>
+      <button [class.text-accent]="view === 'list'" (click)="view = 'list'" mat-icon-button class="view__btn">
+        <mat-icon>list_alt</mat-icon>
+      </button>
     </div>
   </div>
   <div>
@@ -21,23 +25,23 @@
           <div class="w-6/12">
             <a href="" class="flex hover:text-primary">
               <div class="max-h-16 w-16 flex-none mr-3 border" *ngIf="product?.images">
-                <img [src]="product?.images[0]" alt="img">
+                <img [src]="product?.images[0]" alt="img" />
               </div>
               <h6 class="flex-auto">{{ product?.name }}</h6>
             </a>
           </div>
-          <div class="w-2/12">{{product?.category}}</div>
-          <div class="w-2/12 text-center">${{product?.price}}</div>
+          <div class="w-2/12">{{ product?.category }}</div>
+          <div class="w-2/12 text-center">${{ product?.price }}</div>
           <div class="w-2/12">
             <div class="flex items-center">
               <mat-icon class="mr-1 text-lg leading-4 h-4 w-4 text-yellow-500">star_rate</mat-icon>
-              {{product?.rating}}
+              {{ product?.rating }}
             </div>
           </div>
           <div class="w-1/12">
             <div class="flex items-center">
               <mat-icon class="mr-1 text-lg leading-4 h-4 w-4">feedback</mat-icon>
-              {{product?.feedback}}
+              {{ product?.feedback }}
             </div>
           </div>
           <div class="w-1/12 text-right">
@@ -71,6 +75,9 @@
           </mat-card-actions>
         </mat-card>
       </div>
-    </div>  
+    </div>
+    <button type="submit">
+      <a [routerLink]="'/dashboard/orders'" class="font-semibold" mat-flat-button color="warn">Purchase</a>
+    </button>
   </div>
 </div>

@@ -14,7 +14,7 @@ const DashboardChildrenRoute: Routes = [
     component: DashboardIndexComponent
   },
   {
-    path: 'saved-items',
+    path: 'shopping-cart',
     component: DashboardSavedItemComponent
   },
   {

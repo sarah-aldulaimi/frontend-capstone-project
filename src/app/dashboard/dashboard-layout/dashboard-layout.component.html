@@ -36,7 +36,9 @@
             class="font-semibold text-gray-500 hover:text-primary"
             ><mat-icon class="mr-2">article</mat-icon> Orders</a
           >
-          <a (click)="onLogout()" mat-list-item class="font-semibold text-gray-500 hover:text-primary"><mat-icon class="mr-2">logout</mat-icon> Logout</a>
+          <a (click)="onLogout()" mat-list-item class="font-semibold text-gray-500 hover:text-primary"
+            ><mat-icon class="mr-2">logout</mat-icon> Logout</a
+          >
         </mat-nav-list>
       </div>
     </mat-sidenav>
@@ -66,7 +68,7 @@
           </div>
         </div>
       </header>
-      
+
       <div>
         <div class="container">
           <div class="grid grid-cols-12 gap-8">
@@ -74,7 +76,7 @@
               <div class="py-5 min-h-screen">
                 <div class="rounded-md border overflow-hidden h-full">
                   <div class="user text-center bg-primary py-10 px-5">
-                    <img class="ml-auto mr-auto" src="assets/images/avatar.png" alt="abraham lincoln" />
+                    <!-- <img class="ml-auto mr-auto" src="assets/images/avatar.png" alt="abraham lincoln" /> -->
                     <h4 class="text-white mt-3">Abraham Lincoln</h4>
                   </div>
                   <mat-nav-list class="_sidenav">
@@ -95,10 +97,10 @@
                     >
                     <a
                       mat-list-item
-                      routerLink="/dashboard/saved-items"
+                      routerLink="/dashboard/shopping-cart"
                       routerLinkActive="bg-gray-200"
                       class="font-semibold text-gray-500 hover:text-primary"
-                      ><mat-icon class="mr-2">list</mat-icon> Saved Items</a
+                      ><mat-icon class="mr-2">list</mat-icon> Shopping Cart</a
                     >
                     <a
                       mat-list-item
@@ -107,7 +109,9 @@
                       class="font-semibold text-gray-500 hover:text-primary"
                       ><mat-icon class="mr-2">article</mat-icon> Orders</a
                     >
-                    <a (click)="onLogout()" mat-list-item class="font-semibold text-gray-500 hover:text-primary"><mat-icon class="mr-2">logout</mat-icon> Logout</a>
+                    <a (click)="onLogout()" mat-list-item class="font-semibold text-gray-500 hover:text-primary"
+                      ><mat-icon class="mr-2">logout</mat-icon> Logout</a
+                    >
                   </mat-nav-list>
                 </div>
               </div>

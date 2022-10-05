@@ -11,6 +11,9 @@
             <span class="text-gray-800">Product Name</span>
           </th>
           <th>
+            <span class="text-gray-800">Description</span>
+          </th>
+          <th>
             <span class="text-gray-800">Individual Price</span>
           </th>
           <th>
@@ -27,15 +30,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="border">
+        <tr *ngFor="let product of products" class="border">
           <td>
-            <span class="text-primary">{{ order?.productID }}</span>
+            <span class="text-primary">{{ product?.name }}</span>
           </td>
-          <!-- <td>
-            {{ order?.orderBy | titlecase }}
-          </td> -->
           <td>
-            <span>AED{{ order?.totalCost }}</span>
+            <span>{{ product.description }}</span>
+          </td>
+          <td>
+            <span>AED {{ product.price }}</span>
           </td>
           <td>
             <span>{{ order.productCount }}</span>
@@ -71,7 +74,7 @@
         </tr>
       </tbody>
       <tfoot>
-        <h5 class="mb-3 font-medium" style="float: right">Total Cost: AED{{ order.totalCost }}</h5>
+        <h6 class="mb-3 font-medium" style="float: right">Total Cost: AED{{ order.totalCost }}</h6>
       </tfoot>
     </table>
   </div>

@@ -43,4 +43,6 @@ export class ProductListComponent implements OnInit {
       }
     }
   }
+
+  public addProduct(): void {}
 }

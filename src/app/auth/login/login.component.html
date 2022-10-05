@@ -65,7 +65,7 @@
             />
             <label for="remember_me" class="ml-2 block text-sm text-gray-900"> Keep me signed in </label>
           </div> -->
-          <div class="flex w-full mt-6">
+          <div class="flex w-full mt-6" style="padding: 5px">
             <button
               class="
                 w-full
@@ -83,7 +83,27 @@
               type="submit"
               [disabled]="!addForm.valid"
             >
-              Sign in
+              Customer Sign in
+            </button>
+            <button
+              style="margin-left: 5px"
+              class="
+                w-full
+                bg-gray-800
+                hover:bg-grey-900
+                text-white text-sm
+                py-2
+                px-4
+                font-semibold
+                rounded
+                focus:outline-none
+                focus:shadow-outline
+                h-10
+              "
+              type="submit"
+              [disabled]="!addForm.valid"
+            >
+              Admin Sign in
             </button>
           </div>
         </form>

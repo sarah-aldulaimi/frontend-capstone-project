@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   public loginmyForm(addForm: NgForm): void {
     this.userService.login(addForm.value).subscribe((res: User) => {
       console.log(res);
+      localStorage.setItem('userId', res.id.toString());
       if (res != null) {
         this.LoginSuccessful();
       } else {

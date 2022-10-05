@@ -12,11 +12,13 @@ import { ProductService } from 'src/app/shared/service/product.service';
 export class DashboardOrderDetailsComponent implements OnInit {
   order: Orders | undefined;
   products: Products[] | undefined;
+  productCount: number;
   @Input() orderID: number;
   constructor(private orderService: OrderService, private productService: ProductService) {}
 
   ngOnInit(): void {
     this.getOrder();
+    this.getProductsForOrder();
   }
 
   public getOrder(): void {
@@ -26,5 +28,24 @@ export class DashboardOrderDetailsComponent implements OnInit {
     });
   }
 
-  public getProductsForOrder(): void {}
+  public getProductsForOrder(): void {
+    this.orderService.viewAllProductsFromOrder(1).subscribe((res: Products[]) => {
+      console.log(res);
+      this.products = res;
+      this.products.forEach(element => {
+        console.log(this.getProductCount(element));
+      });
+    });
+  }
+
+  public getProductCount(product: Products): number {
+    let temp = 0;
+    for (let i = 0; i < this.products.length; i++) {
+      if (this.products[i] == product) {
+        console.log(temp);
+        temp++;
+      }
+    }
+    return temp;
+  }
 }

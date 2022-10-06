@@ -27,7 +27,7 @@
       <tbody>
         <tr *ngFor="let order of orders" class="border">
           <td>
-            <a class="text-primary" [routerLink]="['/orders', order.id]">#{{ order?.orderNumber }}</a>
+            <a class="text-primary" [routerLink]="[order.id]">#{{ order?.orderNumber }}</a>
           </td>
           <td>
             {{ order?.orderBy | titlecase }}

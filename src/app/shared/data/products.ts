@@ -171,4 +171,5 @@ export interface Products {
   description: String;
   price: number;
   categoryID: number;
+  productCount: number;
 }

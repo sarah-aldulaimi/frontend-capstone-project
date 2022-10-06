@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Orders } from 'src/app/shared/data/orders';
 import { OrderService } from 'src/app/shared/service/order.service';
 
@@ -9,7 +10,7 @@ import { OrderService } from 'src/app/shared/service/order.service';
 })
 export class DashboardOrderComponent implements OnInit {
   orders: Orders[] | undefined;
-  constructor(private orderService: OrderService) {}
+  constructor(private orderService: OrderService, private router: Router) {}
 
   ngOnInit(): void {
     this.getOrders();

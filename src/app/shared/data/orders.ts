@@ -1,4 +1,4 @@
-export interface Orders {
+export class Orders {
   id: number;
   userID: number;
   orderNumber: number;
@@ -6,4 +6,9 @@ export interface Orders {
   productCount: number;
   totalCost: number;
   status: String;
+
+  constructor(userID: number) {
+    this.userID = userID;
+    this.status = 'initialized';
+  }
 }

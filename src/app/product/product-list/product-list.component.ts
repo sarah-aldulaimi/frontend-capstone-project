@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/shared/data/category';
+import { Orders } from 'src/app/shared/data/orders';
 import { CategoryService } from 'src/app/shared/service/category.service';
+import { OrderService } from 'src/app/shared/service/order.service';
 import { ProductService } from 'src/app/shared/service/product.service';
 import { Products } from '../../shared/data/products';
 
@@ -15,7 +17,13 @@ export class ProductListComponent implements OnInit {
   products: Products[] | undefined;
   filteredProducts: Products[] | undefined;
   categories: Category[] | undefined;
-  constructor(private productService: ProductService, private categoryService: CategoryService) {}
+  userID: number = +localStorage.getItem('userId');
+  newOrder = new Orders(this.userID);
+  constructor(
+    private productService: ProductService,
+    private orderService: OrderService,
+    private categoryService: CategoryService
+  ) {}
 
   ngOnInit(): void {
     this.getAllProducts();
@@ -44,5 +52,13 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  public addProduct(): void {}
+  // public addProductToCart(): void {
+  //   this.orderService.addProductToOrder();
+  // }
+
+  public createOrder(): void {
+    this.orderService.addOrder(this.newOrder).subscribe((res: Orders) => {
+      console.log(res);
+    });
+  }
 }

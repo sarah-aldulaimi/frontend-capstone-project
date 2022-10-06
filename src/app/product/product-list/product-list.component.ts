@@ -19,6 +19,7 @@ export class ProductListComponent implements OnInit {
   categories: Category[] | undefined;
   userID: number = +localStorage.getItem('userId');
   newOrder = new Orders(this.userID);
+
   constructor(
     private productService: ProductService,
     private orderService: OrderService,
@@ -52,13 +53,24 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  // public addProductToCart(): void {
-  //   this.orderService.addProductToOrder();
-  // }
+  public addProductToCart(productID: number): void {
+    if (localStorage.getItem('orderID') == null) {
+      this.createOrder();
+    } else {
+      let orderID = +localStorage.getItem('orderID');
+      let tempProduct: Products;
+      this.products.forEach(element => {
+        if ((element.id = productID)) {
+          tempProduct = element;
+        }
+      });
+      this.orderService.addProductToOrder(orderID, tempProduct).subscribe();
+    }
+  }
 
   public createOrder(): void {
     this.orderService.addOrder(this.newOrder).subscribe((res: Orders) => {
-      console.log(res);
+      localStorage.setItem('orderID', res.id.toString());
     });
   }
 }

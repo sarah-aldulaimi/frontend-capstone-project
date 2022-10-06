@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Category } from 'src/app/shared/data/category';
 import { Orders } from 'src/app/shared/data/orders';
 import { Products } from 'src/app/shared/data/products';
+import { CategoryService } from 'src/app/shared/service/category.service';
 import { OrderService } from 'src/app/shared/service/order.service';
 
 @Component({
@@ -10,23 +12,39 @@ import { OrderService } from 'src/app/shared/service/order.service';
 })
 export class DashboardSavedItemComponent implements OnInit {
   view = 'list';
-
   shoppingCart: Products[];
-  constructor(private orderService: OrderService) {}
+  categories: Category[];
+  categoryName: String;
+  constructor(private orderService: OrderService, private categoryService: CategoryService) {}
 
-  ngOnInit(): void {}
-
-  public addItem(item: Products): void {
-    this.shoppingCart.push(item);
+  ngOnInit(): void {
+    this.viewCart();
+    this.displayCategoryForProduct();
   }
 
-  public removeItem(item: Products): void {
-    this.shoppingCart.forEach((element, index) => {
-      if (element == item) {
-        this.shoppingCart.splice(index);
-      }
+  public viewCart(): void {
+    let orderID = +localStorage.getItem('orderID');
+    this.orderService.viewAllProductsFromOrder(orderID).subscribe((res: Products[]) => {
+      console.log(res);
+      this.shoppingCart = res;
     });
   }
+
+  public getCategories(): void {
+    this.categoryService.getAllCategories().subscribe((res: Category[]) => {
+      this.categories = res;
+    });
+  }
+
+  public displayCategoryForProduct(categoryID: number): void {
+    this.categories.forEach(element => {
+      if ((element.id = categoryID)) this.categoryName = element.name;
+    });
+  }
+
+  public addItem(item: Products): void {}
+
+  public removeItem(item: Products): void {}
 
   public purchaseOrder(items: Orders): void {
     this.orderService.addOrder(items).subscribe((res: Orders) => {

@@ -146,10 +146,9 @@
             </div> -->
             <!--TODO: add products count-->
             <div class="flex-1 text-center">
-              <button (click)="createOrder()">
-                <a [routerLink]="['/products', product.id]" mat-raised-button color="warn" class="px-4"
-                  >Add to shopping cart</a
-                >
+              <button (click)="addProductToCart(product.id)" mat-raised-button color="warn" class="px-4">
+                <!-- <a [routerLink]="['/products', product.id]">t</a> -->
+                Add to shopping cart
               </button>
             </div>
           </mat-card-actions>

@@ -56,11 +56,11 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu" xposition="before">
-              <button mat-menu-item>
-                <mat-icon>dialpad</mat-icon>
+              <button mat-menu-item [routerLink]="[order.id]">
+                <mat-icon>dialpad </mat-icon>
                 <span>Details</span>
               </button>
-              <button mat-menu-item>
+              <button mat-menu-item (click)="deleteOrder(order.id)">
                 <mat-icon>delete</mat-icon>
                 <span>Delete</span>
               </button>

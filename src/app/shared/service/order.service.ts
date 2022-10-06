@@ -30,4 +30,8 @@ export class OrderService {
   public viewAllProductsFromOrder(id: number): Observable<Products[]> {
     return this.http.get<Products[]>(this.baseURL + id + '/products');
   }
+
+  public deleteOrder(id: number): Observable<String> {
+    return this.http.delete<String>(this.baseURL + id);
+  }
 }

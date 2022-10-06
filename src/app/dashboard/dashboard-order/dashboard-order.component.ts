@@ -22,4 +22,10 @@ export class DashboardOrderComponent implements OnInit {
       this.orders = res;
     });
   }
+
+  public deleteOrder(orderID: number): void {
+    this.orderService.deleteOrder(orderID).subscribe((res: String) => {
+      this.ngOnInit();
+    });
+  }
 }

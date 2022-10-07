@@ -19,11 +19,12 @@ export class DashboardSavedItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.viewCart();
-    this.displayCategoryForProduct();
+    this.getCategories();
   }
 
   public viewCart(): void {
     let orderID = +localStorage.getItem('orderID');
+    console.log(orderID);
     this.orderService.viewAllProductsFromOrder(orderID).subscribe((res: Products[]) => {
       console.log(res);
       this.shoppingCart = res;
@@ -33,6 +34,7 @@ export class DashboardSavedItemComponent implements OnInit {
   public getCategories(): void {
     this.categoryService.getAllCategories().subscribe((res: Category[]) => {
       this.categories = res;
+      console.log(res);
     });
   }
 
@@ -50,5 +52,7 @@ export class DashboardSavedItemComponent implements OnInit {
     this.orderService.addOrder(items).subscribe((res: Orders) => {
       console.log(res);
     });
+    localStorage.removeItem('orderID');
+    this.viewCart();
   }
 }

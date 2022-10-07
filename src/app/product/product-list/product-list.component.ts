@@ -19,6 +19,7 @@ export class ProductListComponent implements OnInit {
   categories: Category[] | undefined;
   userID: number = +localStorage.getItem('userId');
   newOrder = new Orders(this.userID);
+  orderID: number;
 
   constructor(
     private productService: ProductService,
@@ -33,14 +34,14 @@ export class ProductListComponent implements OnInit {
 
   public getAllProducts(): void {
     this.productService.getAllProducts().subscribe((res: Products[]) => {
-      console.log(res);
+      //console.log(res);
       this.products = res;
     });
   }
 
   public getAllCategories(): void {
     this.categoryService.getAllCategories().subscribe((res: Category[]) => {
-      console.log(res);
+      //console.log(res);
       this.categories = res;
     });
   }
@@ -53,24 +54,53 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  public addProductToCart(productID: number): void {
-    if (localStorage.getItem('orderID') == null) {
-      this.createOrder();
-    } else {
-      let orderID = +localStorage.getItem('orderID');
-      let tempProduct: Products;
-      this.products.forEach(element => {
-        if ((element.id = productID)) {
-          tempProduct = element;
-        }
-      });
-      this.orderService.addProductToOrder(orderID, tempProduct).subscribe();
-    }
-  }
+  // public createOrder(): void {
+  //   this.orderService.addOrder(this.newOrder).subscribe((res: Orders) => {
+  //     this.orderID = res.id;
+  //     console.log(this.orderID);
+  //   });
+  // }
 
-  public createOrder(): void {
-    this.orderService.addOrder(this.newOrder).subscribe((res: Orders) => {
-      localStorage.setItem('orderID', res.id.toString());
+  // public addProductToCart(productID: number): void {
+  //   // if (localStorage.getItem('orderID') == null) {
+  //   this.createOrder();
+  //   console.log(this.orderID);
+  //   //   console.log(this.orderID);
+  //   // } else {
+  //   //   console.log(this.orderID);
+  //   // }
+
+  //   let tempProduct: Products;
+  //   this.products.forEach(element => {
+  //     if ((element.id = productID)) {
+  //       tempProduct = element;
+  //     }
+  //   });
+  //   this.orderService.addProductToOrder(this.orderID, tempProduct).subscribe((res: Orders) => {
+  //     console.log(res);
+  //   });
+  // }
+
+  public addProductToCart(productID: number): void {
+    let tempProduct: Products;
+    this.products.forEach(element => {
+      if ((element.id = productID)) {
+        tempProduct = element;
+      }
+    });
+
+    if (localStorage.getItem('orderID') == null) {
+      this.orderService.addOrder(this.newOrder).subscribe((res: Orders) => {
+        this.orderID = res.id;
+        localStorage.setItem('orderID', res.id.toString());
+        console.log(this.orderID);
+      });
+    }
+    console.log(localStorage.getItem('orderID'));
+    let tempID = localStorage.getItem('orderID');
+    console.log(tempID);
+    this.orderService.addProductToOrder(Number(tempID), tempProduct).subscribe((res: Orders) => {
+      console.log(res);
     });
   }
 }

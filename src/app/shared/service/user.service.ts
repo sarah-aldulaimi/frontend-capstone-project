@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Role } from '../data/role';
 import { User } from '../data/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  baseURL: string = 'http://localhost:8080/users';
+  baseURL: string = 'http://localhost:8080/users/';
   constructor(private http: HttpClient) {}
 
   public getAllUsers(): Observable<User[]> {
@@ -15,7 +16,7 @@ export class UserService {
   }
 
   public getUser(id: number): Observable<User> {
-    return this.http.get<User>('http://localhost:8080/users/' + id);
+    return this.http.get<User>(this.baseURL + id);
   }
 
   public login(user: User): Observable<User> {
@@ -25,5 +26,9 @@ export class UserService {
 
   public addUser(user: User): Observable<User> {
     return this.http.post<User>(this.baseURL, user);
+  }
+
+  public checkUserRole(id: number): Observable<Role[]> {
+    return this.http.get<Role[]>(this.baseURL + id + '/roles');
   }
 }

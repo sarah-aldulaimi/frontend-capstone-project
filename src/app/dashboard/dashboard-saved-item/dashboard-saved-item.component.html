@@ -17,8 +17,8 @@
           <div class="w-6/12 font-medium"><div class="pl-16 ml-3">Product</div></div>
           <div class="w-2/12 font-medium">Category</div>
           <div class="w-2/12 font-medium text-center">Price</div>
-          <div class="w-2/12 font-medium">Rating</div>
-          <div class="w-1/12 font-medium">Feedback</div>
+          <div class="w-2/12 font-medium">Count</div>
+          <!-- <div class="w-1/12 font-medium">Feedback</div> -->
           <div class="w-1/12"></div>
         </div>
         <div class="flex items-center p-4 border-b hover:bg-blue-100" *ngFor="let product of shoppingCart | slice: 0:9">
@@ -38,12 +38,12 @@
               {{ product?.rating }}
             </div>
           </div>
-          <div class="w-1/12">
+          <!-- <div class="w-1/12">
             <div class="flex items-center">
               <mat-icon class="mr-1 text-lg leading-4 h-4 w-4">feedback</mat-icon>
               {{ product?.feedback }}
             </div>
-          </div>
+          </div> -->
           <div class="w-1/12 text-right">
             <button class="action_icon__btn" mat-icon-button [matMenuTriggerFor]="menu">
               <mat-icon>more_vert</mat-icon>
@@ -76,8 +76,9 @@
         </mat-card>
       </div>
     </div>
-    <button type="submit">
-      <a [routerLink]="'/dashboard/orders'" class="font-semibold" mat-flat-button color="warn">Purchase</a>
+    <button type="submit" (click)="purchaseOrder()" class="font-semibold" mat-flat-button color="warn">
+      <!-- <a [routerLink]="'/dashboard/orders'" class="font-semibold" mat-flat-button color="warn">Purchase</a> -->
+      Purchase
     </button>
   </div>
 </div>

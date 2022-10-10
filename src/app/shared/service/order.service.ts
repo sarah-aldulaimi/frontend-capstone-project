@@ -34,4 +34,8 @@ export class OrderService {
   public deleteOrder(id: number): Observable<String> {
     return this.http.delete<String>(this.baseURL + id);
   }
+
+  public editOrder(id: number, order: Orders): Observable<Orders> {
+    return this.http.put<Orders>(this.baseURL + id, order);
+  }
 }

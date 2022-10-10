@@ -48,11 +48,15 @@ export class DashboardSavedItemComponent implements OnInit {
 
   public removeItem(item: Products): void {}
 
-  public purchaseOrder(items: Orders): void {
-    this.orderService.addOrder(items).subscribe((res: Orders) => {
-      console.log(res);
+  public purchaseOrder(): void {
+    this.orderService.getOrder(Number(localStorage.getItem('orderID'))).subscribe((res: Orders) => {
+      res.status = 'completed';
+      console.log(res.status);
+      this.orderService.editOrder(Number(localStorage.getItem('orderID')), res).subscribe((respone: Orders) => {
+        console.log(respone);
+      });
+      localStorage.removeItem('orderID');
+      window.location.reload();
     });
-    localStorage.removeItem('orderID');
-    this.viewCart();
   }
 }

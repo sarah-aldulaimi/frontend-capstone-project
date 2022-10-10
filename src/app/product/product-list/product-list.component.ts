@@ -54,33 +54,6 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  // public createOrder(): void {
-  //   this.orderService.addOrder(this.newOrder).subscribe((res: Orders) => {
-  //     this.orderID = res.id;
-  //     console.log(this.orderID);
-  //   });
-  // }
-
-  // public addProductToCart(productID: number): void {
-  //   // if (localStorage.getItem('orderID') == null) {
-  //   this.createOrder();
-  //   console.log(this.orderID);
-  //   //   console.log(this.orderID);
-  //   // } else {
-  //   //   console.log(this.orderID);
-  //   // }
-
-  //   let tempProduct: Products;
-  //   this.products.forEach(element => {
-  //     if ((element.id = productID)) {
-  //       tempProduct = element;
-  //     }
-  //   });
-  //   this.orderService.addProductToOrder(this.orderID, tempProduct).subscribe((res: Orders) => {
-  //     console.log(res);
-  //   });
-  // }
-
   public addProductToCart(productID: number): void {
     let tempProduct: Products;
     this.products.forEach(element => {
@@ -93,21 +66,20 @@ export class ProductListComponent implements OnInit {
       this.orderService.addOrder(this.newOrder).subscribe((res: Orders) => {
         this.orderID = res.id;
         localStorage.setItem('orderID', res.id.toString());
-        console.log(localStorage);
-        console.log(localStorage.getItem('orderID'));
+        // console.log(localStorage.getItem('orderID'));
 
         let tempID = localStorage.getItem('orderID');
-        console.log(tempID);
+        // console.log(tempID);
         this.orderService.addProductToOrder(Number(tempID), tempProduct).subscribe((res: Orders) => {
-          console.log(res);
+          // console.log(res);
         });
       });
     } else {
-      console.log(localStorage.getItem('orderID'));
+      // console.log(localStorage.getItem('orderID'));
       let tempID = localStorage.getItem('orderID');
-      console.log(tempID);
+      // console.log(tempID);
       this.orderService.addProductToOrder(Number(tempID), tempProduct).subscribe((res: Orders) => {
-        console.log(res);
+        // console.log(res);
       });
     }
   }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 // import { CommonModule } from '@angular/common';
 import { UserService } from 'src/app/shared/service/user.service';
 import { User } from 'src/app/shared/data/user';
+import { Role } from 'src/app/shared/data/role';
 
 @Component({
   selector: 'll-login',
@@ -11,6 +12,7 @@ import { User } from 'src/app/shared/data/user';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  userRoles: Role[];
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {}
@@ -29,5 +31,16 @@ export class LoginComponent implements OnInit {
 
   public LoginSuccessful(): void {
     this.router.navigate(['/dashboard']);
+  }
+
+  public checkLoginRole(): void {
+    this.userService.checkUserRole(Number(localStorage.getItem('userId'))).subscribe((res: Role[]) => {
+      console.log(res);
+      this.userRoles = res;
+      this.userRoles.forEach(element => {
+        if (element.id == 1) {
+        }
+      });
+    });
   }
 }

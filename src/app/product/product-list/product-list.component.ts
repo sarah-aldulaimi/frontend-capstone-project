@@ -93,14 +93,22 @@ export class ProductListComponent implements OnInit {
       this.orderService.addOrder(this.newOrder).subscribe((res: Orders) => {
         this.orderID = res.id;
         localStorage.setItem('orderID', res.id.toString());
-        console.log(this.orderID);
+        console.log(localStorage);
+        console.log(localStorage.getItem('orderID'));
+
+        let tempID = localStorage.getItem('orderID');
+        console.log(tempID);
+        this.orderService.addProductToOrder(Number(tempID), tempProduct).subscribe((res: Orders) => {
+          console.log(res);
+        });
+      });
+    } else {
+      console.log(localStorage.getItem('orderID'));
+      let tempID = localStorage.getItem('orderID');
+      console.log(tempID);
+      this.orderService.addProductToOrder(Number(tempID), tempProduct).subscribe((res: Orders) => {
+        console.log(res);
       });
     }
-    console.log(localStorage.getItem('orderID'));
-    let tempID = localStorage.getItem('orderID');
-    console.log(tempID);
-    this.orderService.addProductToOrder(Number(tempID), tempProduct).subscribe((res: Orders) => {
-      console.log(res);
-    });
   }
 }

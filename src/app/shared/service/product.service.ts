@@ -29,4 +29,8 @@ export class ProductService {
   public editProduct(id: number, product: Products): Observable<Products> {
     return this.http.put<Products>(this.baseURL + id, product);
   }
+
+  public getFilteredProducts(categoryID: number): Observable<Products[]> {
+    return this.http.get<Products[]>(this.baseURL + 'categories/' + categoryID);
+  }
 }

@@ -1,5 +1,5 @@
 <ll-product-hero></ll-product-hero>
-<div class="ll-search pb-6">
+<!-- <div class="ll-search pb-6">
   <div class="container">
     <div class="border overflow-hidden sm:rounded-md p-5">
       <div class="mb-3">
@@ -79,7 +79,7 @@
               </option>
             </select>
           </div>
-          <!-- <div class="col-span-6 sm:col-span-3">
+          <div class="col-span-6 sm:col-span-3">
             <select
               name="rating"
               class="
@@ -105,7 +105,7 @@
               <option>4</option>
               <option>5</option>
             </select>
-          </div> -->
+          </div>
           <div class="col-span-6">
             <button type="submit" mat-flat-button color="accent">Apply filter</button>
           </div>
@@ -113,7 +113,82 @@
       </mat-expansion-panel>
     </div>
   </div>
+</div> -->
+
+<div class="ll-search pb-6">
+  <div class="container">
+    <div class="border overflow-hidden sm:rounded-md p-5">
+      <div class="mb-3">
+        <div class="flex justify-between flex-wrap">
+          <h4>Filter By Category</h4>
+          <!-- <button (click)="advanceSearchExpanded = !advanceSearchExpanded" mat-button>
+            <mat-icon>tune</mat-icon> Filter By Category
+          </button> -->
+        </div>
+        <div class="mt-3 flex">
+          <!-- <input
+            type="text"
+            placeholder="I am looking for ..."
+            class="flex-1 w-full sm:text-sm lg:text-xl border-gray-300 rounded-l-md py-3 px-6"
+            required
+          /> -->
+          <form
+            [formGroup]="categorySelectForm"
+            (ngSubmit)="filterProducts()"
+            id="categoryForm"
+            #categoryForm="ngForm"
+            class="flex-1 w-full sm:text-sm lg:text-xl border-gray-300 rounded-l-md py-3 px-6"
+          >
+            <select
+              formControlName="category"
+              class="flex-1 w-full sm:text-sm lg:text-xl border-gray-300 rounded-l-md py-3 px-6"
+            >
+              <option [ngValue]="null">All Categories</option>
+              <option *ngFor="let category of categories" [ngValue]="category.id">
+                {{ category.name }} - {{ category.description }}
+              </option>
+            </select>
+            <button type="submit" class="bg-primary w-24 rounded-r-md">
+              <mat-icon class="leading-8">search</mat-icon>
+            </button>
+          </form>
+        </div>
+      </div>
+      <!-- <mat-expansion-panel [expanded]="advanceSearchExpanded">
+        <div id="search" class="grid grid-cols-6 gap-6 mt-4">
+          <div class="col-span-6 sm:col-span-3">
+            <select
+              name="categories"
+              class="
+                mt-1
+                block
+                w-full
+                py-2
+                px-3
+                border border-gray-300
+                bg-white
+                rounded-md
+                shadow-sm
+                focus:outline-none
+                focus:ring-indigo-500
+                focus:border-indigo-500
+                sm:text-sm
+              "
+            >
+              <option *ngFor="let category of categories" value="{{ category.id }}">
+                {{ category.name }}
+              </option>
+            </select>
+          </div>
+          <div class="col-span-6">
+            <button type="submit" mat-flat-button color="accent">Apply filter</button>
+          </div>
+        </div>
+      </mat-expansion-panel> -->
+    </div>
+  </div>
 </div>
+
 <div class="ll-products-area mb-24">
   <div class="container">
     <div class="grid grid-cols-12 gap-6 xxl:gap-8">

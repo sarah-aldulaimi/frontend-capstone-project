@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { NgParticlesModule } from 'ng-particles';
@@ -19,7 +20,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     MatExpansionModule,
     NgParticlesModule,
     NgxSkeletonLoaderModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ProductModule {}

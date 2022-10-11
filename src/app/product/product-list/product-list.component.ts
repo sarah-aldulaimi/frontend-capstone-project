@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Category } from 'src/app/shared/data/category';
 import { Orders } from 'src/app/shared/data/orders';
 import { CategoryService } from 'src/app/shared/service/category.service';
@@ -20,16 +21,21 @@ export class ProductListComponent implements OnInit {
   userID: number = +localStorage.getItem('userId');
   newOrder = new Orders(this.userID);
   orderID: number;
+  categorySelectForm: FormGroup;
 
   constructor(
     private productService: ProductService,
     private orderService: OrderService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.getAllProducts();
     this.getAllCategories();
+    this.categorySelectForm = this.fb.group({
+      category: [null]
+    });
   }
 
   public getAllProducts(): void {
@@ -46,11 +52,22 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  public filterProducts(categoryID: number): void {
-    for (var product of this.products) {
-      if (product.categoryID == categoryID) {
-        this.filteredProducts.push(product);
-      }
+  public filterProducts(): void {
+    var categoryAsString = JSON.stringify(this.categorySelectForm.value);
+    var split1 = categoryAsString.split(':', 2);
+    var split2 = split1[1].split('}', 2);
+    console.log(split2[0]);
+    let categoryID = Number(split2[0]);
+    console.log(categoryID);
+    if (split2[0] != 'null') {
+      this.productService.getFilteredProducts(categoryID).subscribe((res: Products[]) => {
+        this.products = res;
+      });
+    } else {
+      this.productService.getAllProducts().subscribe((res: Products[]) => {
+        console.log(res);
+        this.products = res;
+      });
     }
   }
 

@@ -15,6 +15,7 @@
 $lieb-primary: mat.define-palette(mat.$green-palette, 700, A400, A700);
 $lieb-accent: mat.define-palette(mat.$deep-orange-palette, 500, 400, A700);
 $lieb-warn: mat.define-palette(mat.$yellow-palette, 700, 500, A700);
+$lieb-red: mat.define-palette(mat.$red-palette, 700, 500, A700);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
@@ -23,7 +24,8 @@ $lieb-theme: mat.define-light-theme(
     color: (
       primary: $lieb-primary,
       accent: $lieb-accent,
-      warn: $lieb-warn
+      warn: $lieb-warn,
+      red: $lieb-red
     )
   )
 );

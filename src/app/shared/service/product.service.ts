@@ -7,7 +7,7 @@ import { Products } from '../data/products';
   providedIn: 'root'
 })
 export class ProductService {
-  baseURL: string = 'http://localhost:8080/products';
+  baseURL: string = 'http://localhost:8080/products/';
   constructor(private http: HttpClient) {}
 
   public getAllProducts(): Observable<Products[]> {
@@ -20,5 +20,13 @@ export class ProductService {
 
   public addProduct(product: Products): Observable<Products> {
     return this.http.post<Products>(this.baseURL, product);
+  }
+
+  public deleteProduct(id: number): Observable<Products> {
+    return this.http.delete<Products>(this.baseURL + id);
+  }
+
+  public editProduct(id: number, product: Products): Observable<Products> {
+    return this.http.put<Products>(this.baseURL + id, product);
   }
 }

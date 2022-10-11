@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Category } from 'src/app/shared/data/category';
 import { Orders } from 'src/app/shared/data/orders';
 import { CategoryService } from 'src/app/shared/service/category.service';
@@ -66,12 +67,12 @@ export class ProductListComponent implements OnInit {
       this.orderService.addOrder(this.newOrder).subscribe((res: Orders) => {
         this.orderID = res.id;
         localStorage.setItem('orderID', res.id.toString());
-        console.log(localStorage.getItem('orderID'));
+        // console.log(localStorage.getItem('orderID'));
 
         let tempID = localStorage.getItem('orderID');
-        console.log(tempID);
+        // console.log(tempID);
         this.orderService.addProductToOrder(Number(tempID), tempProduct).subscribe((res: Orders) => {
-          console.log(res);
+          // console.log(res);
         });
       });
     } else {
@@ -82,5 +83,18 @@ export class ProductListComponent implements OnInit {
         // console.log(res);
       });
     }
+  }
+
+  public deleteProduct(id: number): void {
+    this.productService.deleteProduct(id).subscribe((res: Products) => {
+      window.location.reload();
+    });
+  }
+
+  public editThisProduct(id: number, addForm: NgForm): void {
+    console.log(addForm);
+    // this.productService.editProduct(id, addForm.value).subscribe((res: Products) => {
+    //   console.log(res);
+    // });
   }
 }

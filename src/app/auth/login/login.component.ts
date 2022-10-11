@@ -40,15 +40,17 @@ export class LoginComponent implements OnInit {
       console.log(res);
       this.userRoles = res;
       this.userRoles.forEach(element => {
-        localStorage.setItem('userRole', element.name.toString());
+        if (element.name == localStorage.getItem('userRole')) {
+          this.LoginSuccessful();
+        }
       });
     });
   }
 
   public checkIfUserIsAdmin(): void {
-    if (localStorage.getItem('userRole') == 'Admin') this.LoginSuccessful();
+    localStorage.setItem('userRole', 'Admin');
   }
   public checkIfUserIsCustomer(): void {
-    if (localStorage.getItem('userRole') == 'Customer') this.LoginSuccessful();
+    localStorage.setItem('userRole', 'Customer');
   }
 }

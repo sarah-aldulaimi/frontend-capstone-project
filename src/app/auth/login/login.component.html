@@ -67,6 +67,7 @@
           </div> -->
           <div class="flex w-full mt-6" style="padding: 5px">
             <button
+              (click)="checkIfUserIsCustomer()"
               class="
                 w-full
                 bg-gray-800
@@ -86,6 +87,7 @@
               Customer Sign in
             </button>
             <button
+              (click)="checkIfUserIsAdmin()"
               style="margin-left: 5px"
               class="
                 w-full

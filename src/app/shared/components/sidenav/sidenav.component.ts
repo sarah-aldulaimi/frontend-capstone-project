@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { menuList } from '../../data/menus';
+import { AdminmenuList, menuList } from '../../data/menus';
 
 @Component({
   selector: 'll-sidenav',
@@ -8,10 +8,13 @@ import { menuList } from '../../data/menus';
 })
 export class SidenavComponent implements OnInit {
   navList = [];
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
-    this.navList = menuList;
+    if (Number(localStorage.getItem('userRole')) == 1) {
+      this.navList = menuList;
+    } else {
+      this.navList = AdminmenuList;
+    }
   }
-
 }

@@ -13,6 +13,8 @@ import { Role } from 'src/app/shared/data/role';
 })
 export class LoginComponent implements OnInit {
   userRoles: Role[];
+  isUserAdmin: boolean = false;
+
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {}
@@ -22,7 +24,7 @@ export class LoginComponent implements OnInit {
       console.log(res);
       localStorage.setItem('userId', res.id.toString());
       if (res != null) {
-        this.LoginSuccessful();
+        this.checkLoginRole();
       } else {
         alert('Login unsuccessful!\nPlease enter the correct email/password!');
       }
@@ -38,9 +40,15 @@ export class LoginComponent implements OnInit {
       console.log(res);
       this.userRoles = res;
       this.userRoles.forEach(element => {
-        if (element.id == 1) {
-        }
+        localStorage.setItem('userRole', element.name.toString());
       });
     });
+  }
+
+  public checkIfUserIsAdmin(): void {
+    if (localStorage.getItem('userRole') == 'Admin') this.LoginSuccessful();
+  }
+  public checkIfUserIsCustomer(): void {
+    if (localStorage.getItem('userRole') == 'Customer') this.LoginSuccessful();
   }
 }

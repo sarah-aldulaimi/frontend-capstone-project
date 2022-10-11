@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { NgSelectOption } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Category } from 'src/app/shared/data/category';
 import { Orders } from 'src/app/shared/data/orders';
 import { CategoryService } from 'src/app/shared/service/category.service';
@@ -24,7 +25,8 @@ export class ProductListComponent implements OnInit {
     private productService: ProductService,
     private orderService: OrderService,
     private categoryService: CategoryService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -121,5 +123,9 @@ export class ProductListComponent implements OnInit {
       console.log(addForm.value);
       this.productService.editProduct(id, addForm.value).subscribe((response: Products) => {});
     });
+  }
+
+  public navigateUsingButton(link: String): void {
+    this.router.navigate([link]);
   }
 }

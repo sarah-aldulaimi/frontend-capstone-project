@@ -7,8 +7,6 @@ import { OrderService } from 'src/app/shared/service/order.service';
 import { ProductService } from 'src/app/shared/service/product.service';
 import { Products } from '../../shared/data/products';
 
-declare function test(): any;
-
 @Component({
   selector: 'll-product-list',
   templateUrl: './product-list-admin.component.html',
@@ -33,7 +31,6 @@ export class ProductListAdminComponent implements OnInit {
   ngOnInit(): void {
     this.getAllProducts();
     this.getAllCategories();
-    test();
   }
 
   public getAllProducts(): void {
@@ -91,6 +88,8 @@ export class ProductListAdminComponent implements OnInit {
   public addProduct(addForm: NgForm): void {
     this.productService.addProduct(addForm.value).subscribe((res: Products) => {
       console.log(res);
+      const temp = document.getElementById('success');
+      temp.innerHTML = 'Success';
     });
   }
 }

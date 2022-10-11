@@ -32,10 +32,27 @@
                 {{ category.name }} - {{ category.description }}
               </option>
             </select>
-            <button type="submit" class="bg-primary w-24 rounded-r-md">
+            <button
+              type="submit"
+              class="bg-primary w-24"
+              style="border-radius: 5px; box-shadow: 1px 2px 4px rgb(169, 169, 169)"
+            >
               <mat-icon class="leading-8">search</mat-icon>
             </button>
           </form>
+          <button
+            (click)="navigateUsingButton('products-admin/add-product')"
+            class="bg-warn w-24"
+            style="border-radius: 5px; margin-left: 3px; box-shadow: 1px 2px 4px rgb(169, 169, 169)"
+          >
+            Add Product
+          </button>
+          <button
+            class="bg-warn w-24"
+            style="border-radius: 5px; margin-left: 3px; box-shadow: 1px 2px 4px rgb(169, 169, 169)"
+          >
+            Add Category
+          </button>
         </div>
       </div>
       <!-- <mat-expansion-panel [expanded]="advanceSearchExpanded">

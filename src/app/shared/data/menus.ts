@@ -25,3 +25,25 @@ export const menuList: Menu[] = [
   //   name: 'Doc'
   // }
 ];
+export const AdminmenuList: Menu[] = [
+  {
+    path: '/products-admin',
+    name: 'Products'
+  },
+  // {
+  //   path: '/about',
+  //   name: 'About'
+  // },
+  // {
+  //   path: '/contact',
+  //   name: 'Contact'
+  // },
+  {
+    path: '/dashboard',
+    name: 'Dashboard'
+  }
+  // ,{
+  //   path: '/doc',
+  //   name: 'Doc'
+  // }
+];

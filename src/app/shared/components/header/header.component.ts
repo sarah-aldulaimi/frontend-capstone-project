@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
-import { menuList as staticMenuList } from '../../data/menus';
+import { AdminmenuList, menuList as staticMenuList } from '../../data/menus';
 
 @Component({
   selector: 'll-header',
@@ -16,10 +16,18 @@ export class HeaderComponent implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit(): void {
-    this.menuList = staticMenuList;
+    if (localStorage.getItem('userRole') == 'Admin') {
+      this.menuList = AdminmenuList;
+    } else {
+      this.menuList = staticMenuList;
+    }
     this.breakpointObserver.observe(['(max-width: 1199px)']).subscribe(({ matches }) => {
       this.isLessThenLargeDevice = matches;
     });
+    if (localStorage.getItem('userId') != null) {
+      const loginbtn = document.getElementById('loginbtn');
+      loginbtn.innerHTML = 'Logout';
+    }
   }
 
   @HostListener('window:scroll', ['$event'])

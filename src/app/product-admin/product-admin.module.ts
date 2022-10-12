@@ -11,7 +11,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { ProductHeroComponent } from './product-list/product-hero/product-hero.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ProductListAdminComponent } from './product-list-admin/product-list-admin.component';
-import { importType } from '@angular/compiler/src/output/output_ast';
+// import { importType } from '@angular/compiler/src/output/output_ast';
 
 @NgModule({
   declarations: [ProductListComponent, ProductDetailsComponent, ProductHeroComponent, ProductListAdminComponent],

@@ -34,7 +34,6 @@ export class SignupComponent implements OnInit {
       localStorage.setItem('userId', res.id.toString());
       this.userService.assignUserRole(res.id, roles[1]).subscribe((response: Role) => {
         console.log(response);
-
         this.router.navigate(['/dashboard']);
       });
     });

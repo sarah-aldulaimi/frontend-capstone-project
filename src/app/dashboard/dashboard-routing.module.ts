@@ -11,7 +11,7 @@ const DashboardChildrenRoute: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: DashboardIndexComponent
+    component: DashboardProfileComponent
   },
   {
     path: 'shopping-cart',

@@ -1,4 +1,4 @@
-<ll-product-hero></ll-product-hero>
+<div style="height: 100px"></div>
 <div class="ll-search pb-6">
   <div class="container">
     <div class="border overflow-hidden sm:rounded-md p-5">
@@ -43,6 +43,7 @@
     </div>
   </div>
 </div>
+
 <div class="ll-products-area mb-24">
   <div class="container">
     <div class="grid grid-cols-12 gap-6 xxl:gap-8">
@@ -61,6 +62,7 @@
               </div>
               <div class="flex-grow pl-3">
                 <input
+                  style="width: 100%; border-radius: 3px"
                   type="text"
                   ngModel
                   name="name"
@@ -68,14 +70,18 @@
                   placeholder="{{ product.name }}"
                   class="ll-product__name"
                 />
-                <input
-                  type="text"
-                  ngModel
-                  name="description"
-                  id="description"
-                  placeholder="{{ product?.description }}"
-                  class="ll-product__creator"
-                />
+                <div class="flex justify-between mt-5">
+                  <input
+                    style="width: 100%; border-radius: 3px"
+                    type="text"
+                    ngModel
+                    name="description"
+                    id="description"
+                    placeholder="{{ product?.description }}"
+                    class="ll-product__creator"
+                  />
+                </div>
+
                 <div class="flex justify-between mt-5">
                   <div class="ll-product__price-label">Price: AED</div>
                   <input
@@ -84,19 +90,13 @@
                     name="price"
                     id="price"
                     placeholder="{{ product.price }}"
-                    style="width: 100px"
+                    style="width: 50%; border-radius: 3px"
                     class="ll-product__price text-accent font-bold"
                   />
                 </div>
                 <div class="flex justify-between mt-5">
                   <select
-                    style="
-                      margin-bottom: 10px;
-                      border-radius: 3px;
-                      background-color: #f3f4f6;
-                      font-size: 0.9rem;
-                      width: 100%;
-                    "
+                    style="margin-bottom: 10px; border-radius: 3px; font-size: 1rem; width: 100%"
                     ngModel
                     name="categoryID"
                     id="categoryID"

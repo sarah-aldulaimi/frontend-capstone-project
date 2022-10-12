@@ -7,7 +7,7 @@ import { Category } from '../data/category';
   providedIn: 'root'
 })
 export class CategoryService {
-  baseURL: string = 'http://localhost:8080/categories';
+  baseURL: string = 'http://localhost:8080/categories/';
   constructor(private http: HttpClient) {}
 
   public getAllCategories(): Observable<Category[]> {

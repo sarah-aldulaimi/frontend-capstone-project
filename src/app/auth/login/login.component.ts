@@ -3,7 +3,8 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/service/user.service';
 import { User } from 'src/app/shared/data/user';
-import { Role } from 'src/app/shared/data/role';
+import { Role, roles } from 'src/app/shared/data/role';
+import { RoleService } from 'src/app/shared/service/role.service';
 
 @Component({
   selector: 'll-login',
@@ -14,9 +15,12 @@ export class LoginComponent implements OnInit {
   userRoles: Role[];
   isUserAdmin: boolean = false;
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router, private roleService: RoleService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.roleService.addRole(roles[0]).subscribe((res: Role) => {});
+    this.roleService.addRole(roles[1]).subscribe((res: Role) => {});
+  }
 
   public loginmyForm(addForm: NgForm): void {
     this.userService.login(addForm.value).subscribe((res: User) => {

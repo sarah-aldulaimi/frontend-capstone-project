@@ -47,7 +47,18 @@
         <div class="container">
           <div class="flex items-center">
             <div class="flex items-center">
-              <a class="logo" [routerLink]="['']"><img src="assets/images/logo.png" alt="Logo" /></a>
+              <a class="logo" [routerLink]="['']"><h3>Ecommerce</h3></a>
+              <ul class="flex item-center ml-5" *ngIf="!isLessThenLargeDevice && menuList && menuList.length">
+                <li *ngFor="let menu of menuList">
+                  <a
+                    mat-button
+                    [routerLink]="[menu.path]"
+                    routerLinkActive="bg-gray-100"
+                    class="text-lg font-bold py-2 px-5"
+                    >{{ menu.name }}</a
+                  >
+                </li>
+              </ul>
             </div>
             <button
               *ngIf="isLessThenLargeDevice"
@@ -58,9 +69,9 @@
               <mat-icon>menu</mat-icon>
             </button>
             <div class="items-center flex ml-auto">
-              <button mat-icon-button>
+              <!-- <button mat-icon-button>
                 <mat-icon>notifications</mat-icon>
-              </button>
+              </button> -->
               <button mat-icon-button>
                 <mat-icon>account_circle</mat-icon>
               </button>

@@ -24,10 +24,6 @@ export class HeaderComponent implements OnInit {
     this.breakpointObserver.observe(['(max-width: 1199px)']).subscribe(({ matches }) => {
       this.isLessThenLargeDevice = matches;
     });
-    if (localStorage.getItem('userId') != null) {
-      const loginbtn = document.getElementById('loginbtn');
-      loginbtn.innerHTML = 'Logout';
-    }
   }
 
   @HostListener('window:scroll', ['$event'])

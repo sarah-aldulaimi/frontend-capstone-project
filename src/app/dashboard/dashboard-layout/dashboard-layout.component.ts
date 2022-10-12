@@ -1,6 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AdminmenuList, menuList as staticMenuList } from 'src/app/shared/data/menus';
 import { User } from 'src/app/shared/data/user';
 import { UserService } from 'src/app/shared/service/user.service';
 
@@ -13,7 +14,7 @@ export class DashboardLayoutComponent implements OnInit {
   isLessThenLargeDevice;
   fName: String;
   lName: String;
-
+  menuList = [];
   constructor(
     private breakpointObserver: BreakpointObserver,
     private router: Router,
@@ -28,9 +29,15 @@ export class DashboardLayoutComponent implements OnInit {
       this.fName = res.firstName;
       this.lName = res.lastName;
     });
+    if (localStorage.getItem('userRole') == 'Admin') {
+      this.menuList = AdminmenuList;
+    } else {
+      this.menuList = staticMenuList;
+    }
   }
   onLogout(): void {
     this.router.navigate(['auth/login']);
-    localStorage.removeItem('userID');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userRole');
   }
 }

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { NgForm } from '@angular/forms';
 import { AddCategoryComponent } from './add-category.component';
 
 describe('AddCategoryComponent', () => {
@@ -8,9 +8,8 @@ describe('AddCategoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddCategoryComponent ]
-    })
-    .compileComponents();
+      declarations: [AddCategoryComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

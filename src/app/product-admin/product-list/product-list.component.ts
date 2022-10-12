@@ -40,14 +40,12 @@ export class ProductListComponent implements OnInit {
 
   public getAllProducts(): void {
     this.productService.getAllProducts().subscribe((res: Products[]) => {
-      //console.log(res);
       this.products = res;
     });
   }
 
   public getAllCategories(): void {
     this.categoryService.getAllCategories().subscribe((res: Category[]) => {
-      //console.log(res);
       this.categories = res;
     });
   }
@@ -81,23 +79,13 @@ export class ProductListComponent implements OnInit {
 
     if (localStorage.getItem('orderID') == null) {
       this.orderService.addOrder(this.newOrder).subscribe((res: Orders) => {
-        // this.orderID = res.id;
         localStorage.setItem('orderID', res.id.toString());
-        // console.log(localStorage.getItem('orderID'));
-
         let tempID = localStorage.getItem('orderID');
-        // console.log(tempID);
-        this.orderService.addProductToOrder(Number(tempID), tempProduct).subscribe((res: Orders) => {
-          // console.log(res);
-        });
+        this.orderService.addProductToOrder(Number(tempID), tempProduct).subscribe((res: Orders) => {});
       });
     } else {
-      // console.log(localStorage.getItem('orderID'));
       let tempID = localStorage.getItem('orderID');
-      // console.log(tempID);
-      this.orderService.addProductToOrder(Number(tempID), tempProduct).subscribe((res: Orders) => {
-        // console.log(res);
-      });
+      this.orderService.addProductToOrder(Number(tempID), tempProduct).subscribe((res: Orders) => {});
     }
   }
 

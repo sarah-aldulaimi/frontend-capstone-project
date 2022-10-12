@@ -31,4 +31,8 @@ export class UserService {
   public checkUserRole(id: number): Observable<Role[]> {
     return this.http.get<Role[]>(this.baseURL + id + '/roles');
   }
+
+  public assignUserRole(id: number, role: Role): Observable<Role> {
+    return this.http.post<Role>(this.baseURL + id + '/roles', role);
+  }
 }

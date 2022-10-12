@@ -19,32 +19,18 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   public loginmyForm(addForm: NgForm): void {
-  console.log('1');
-      this.userService.login(addForm.value).subscribe((res: User)=>{
-      console.log(res);
-       if (res != null) {
+    this.userService.login(addForm.value).subscribe((res: User) => {
+      if (res != null) {
         localStorage.setItem('userId', res.id.toString());
-          }else{
-            alert('Login unsuccessful!\nPlease enter the correct email/password!');
-          }
-        });
-    console.log('2')
-    this.checkLoginRole();
+        this.checkLoginRole();
+      } else {
+        alert('Login unsuccessful!\nPlease enter the correct email/password!');
+      }
+    });
   }
 
   public LoginSuccessful(): void {
     this.router.navigate(['/dashboard']);
-  }
-
-  public checkIfUserExists(addForm: NgForm){
-  this.userService.login(addForm.value).subscribe((res: User)=>{
-  console.log(res);
-   if (res != null) {
-    localStorage.setItem('userId', res.id.toString());
-      }else{
-        alert('Login unsuccessful!\nPlease enter the correct email/password!');
-      }
-    });
   }
 
   public checkLoginRole(): void {
@@ -54,10 +40,11 @@ export class LoginComponent implements OnInit {
       this.userRoles.forEach(element => {
         if (element.name == localStorage.getItem('userRole')) {
           this.LoginSuccessful();
-        }else{
-        alert('Login unsuccessful!\nYou are attempting to sign in as a different role');
+        } else {
+          alert('Login unsuccessful!\nYou are attempting to sign in as a different role');
         }
       });
+    });
   }
 
   public checkIfUserIsAdmin(): void {

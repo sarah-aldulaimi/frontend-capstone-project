@@ -30,20 +30,12 @@ export const AdminmenuList: Menu[] = [
     path: '/products-admin',
     name: 'Products'
   },
-  // {
-  //   path: '/about',
-  //   name: 'About'
-  // },
-  // {
-  //   path: '/contact',
-  //   name: 'Contact'
-  // },
+  {
+    path: '/category',
+    name: 'Category'
+  },
   {
     path: '/dashboard',
     name: 'Dashboard'
   }
-  // ,{
-  //   path: '/doc',
-  //   name: 'Doc'
-  // }
 ];

@@ -1,13 +1,13 @@
-<ll-product-hero></ll-product-hero>
+<div style="height: 100px"></div>
 <div class="ll-search pb-6">
   <div class="container">
     <div class="border overflow-hidden sm:rounded-md p-5">
       <div class="mb-3">
-        <div class="flex justify-between flex-wrap">
+        <!-- <div class="flex justify-between flex-wrap">
           <h4>Filter By Category</h4>
-        </div>
+        </div> -->
         <div class="mt-3 flex">
-          <form
+          <!-- <form
             [formGroup]="categorySelectForm"
             (ngSubmit)="filterProducts()"
             id="categoryForm"
@@ -30,13 +30,20 @@
             >
               <mat-icon class="leading-8">search</mat-icon>
             </button>
-          </form>
-          <button
+          </form> -->
+          <!-- <button
             (click)="navigateUsingButton('products-admin/add-product')"
             class="bg-warn w-24"
             style="border-radius: 5px; margin-left: 3px; box-shadow: 1px 2px 4px rgb(169, 169, 169)"
           >
             Add Product
+          </button> -->
+          <button
+            (click)="navigateUsingButton('category/add-category')"
+            class="bg-warn w-24"
+            style="border-radius: 5px; margin-left: 3px; box-shadow: 1px 2px 4px rgb(169, 169, 169)"
+          >
+            Add Category
           </button>
         </div>
       </div>
@@ -46,8 +53,12 @@
 <div class="ll-products-area mb-24">
   <div class="container">
     <div class="grid grid-cols-12 gap-6 xxl:gap-8">
-      <div *ngFor="let product of products" class="col-span-12 md:col-span-6 xl:col-span-4">
-        <form id="editProductForm" #editProductForm="ngForm" (ngSubmit)="editThisProduct(product.id, editProductForm)">
+      <div *ngFor="let category of categories" class="col-span-12 md:col-span-6 xl:col-span-4">
+        <form
+          id="editProductForm"
+          #editProductForm="ngForm"
+          (ngSubmit)="editThisCategory(category.id, editProductForm)"
+        >
           <mat-card class="ll-product">
             <!-- <img
             mat-card-image
@@ -65,7 +76,7 @@
                   ngModel
                   name="name"
                   id="name"
-                  placeholder="{{ product.name }}"
+                  placeholder="{{ category.name }}"
                   class="ll-product__name"
                 />
                 <input
@@ -73,39 +84,9 @@
                   ngModel
                   name="description"
                   id="description"
-                  placeholder="{{ product?.description }}"
+                  placeholder="{{ category.description }}"
                   class="ll-product__creator"
                 />
-                <div class="flex justify-between mt-5">
-                  <div class="ll-product__price-label">Price: AED</div>
-                  <input
-                    type="number"
-                    ngModel
-                    name="price"
-                    id="price"
-                    placeholder="{{ product.price }}"
-                    style="width: 100px"
-                    class="ll-product__price text-accent font-bold"
-                  />
-                </div>
-                <div class="flex justify-between mt-5">
-                  <select
-                    style="
-                      margin-bottom: 10px;
-                      border-radius: 3px;
-                      background-color: #f3f4f6;
-                      font-size: 0.9rem;
-                      width: 100%;
-                    "
-                    ngModel
-                    name="categoryID"
-                    id="categoryID"
-                  >
-                    <option *ngFor="let category of categories" value="{{ category.id }}">
-                      {{ category.name }}
-                    </option>
-                  </select>
-                </div>
               </div>
             </mat-card-content>
             <mat-card-actions class="ll-product__action flex justify-between">
@@ -114,11 +95,8 @@
             </div> -->
               <!--TODO: add products count-->
               <div class="flex-1 text-center">
-                <button (click)="addProductToCart(product.id)" mat-raised-button color="primary" class="px-4">
-                  Add to shopping cart
-                </button>
                 <button type="sumbit" id="editButton" mat-raised-button color="warn" class="px-4">Edit</button>
-                <button (click)="deleteProduct(product.id)" mat-raised-button color="accent" class="px-4">
+                <button (click)="deleteCategory(category.id)" mat-raised-button color="accent" class="px-4">
                   Delete
                 </button>
               </div>
@@ -127,16 +105,5 @@
         </form>
       </div>
     </div>
-    <!-- <div *ngIf="!isLoaded">
-      <ngx-skeleton-loader
-        count="9"
-        appearance="circle"
-        [theme]="{
-          'border-radius': '5px',
-          height: '280px',
-          width: 'calc(33% - 10px)'
-        }"
-      ></ngx-skeleton-loader>
-    </div> -->
   </div>
 </div>

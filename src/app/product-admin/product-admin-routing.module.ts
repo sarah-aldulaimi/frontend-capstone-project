@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddCategoryComponent } from './add-category/add-category.component';
+import { AddCategoryComponent } from '../category/add-category/add-category.component';
 import { ProductListAdminComponent } from './product-list-admin/product-list-admin.component';
 import { ProductListComponent } from './product-list/product-list.component';
 

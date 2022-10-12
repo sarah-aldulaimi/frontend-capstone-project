@@ -12,6 +12,10 @@ const baseLayoutRouting: Routes = [
     loadChildren: () => import('./product-admin/product-admin.module').then(m => m.ProductAdminModule)
   },
   {
+    path: 'category',
+    loadChildren: () => import('./category/category.module').then(m => m.CategoryModule)
+  },
+  {
     path: 'about',
     loadChildren: () => import('./about/about.module').then(m => m.AboutModule)
   },

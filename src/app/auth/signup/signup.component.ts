@@ -6,6 +6,7 @@ import { LocationService } from 'src/app/shared/service/location.service';
 import { UserService } from 'src/app/shared/service/user.service';
 import { Role, roles } from 'src/app/shared/data/role';
 import { RoleService } from 'src/app/shared/service/role.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'll-signup',
@@ -18,7 +19,8 @@ export class SignupComponent implements OnInit {
   constructor(
     private userService: UserService,
     private locationService: LocationService,
-    private roleService: RoleService
+    private roleService: RoleService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -29,8 +31,11 @@ export class SignupComponent implements OnInit {
   public registerUser(addForm: NgForm): void {
     this.userService.addUser(addForm.value).subscribe((res: User) => {
       console.log(res);
+      localStorage.setItem('userId', res.id.toString());
       this.userService.assignUserRole(res.id, roles[1]).subscribe((response: Role) => {
         console.log(response);
+
+        this.router.navigate(['/dashboard']);
       });
     });
   }

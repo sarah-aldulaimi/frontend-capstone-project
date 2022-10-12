@@ -28,15 +28,15 @@ export class DashboardProfileComponent implements OnInit {
   }
 
   public getUser(): void {
-    this.userService.getUser(1).subscribe((res: User) => {
+    this.userService.getUser(Number(localStorage.getItem('userId'))).subscribe((res: User) => {
       console.log(res);
       this.userInfo = res;
+      this.setLocation(this.userInfo.locationId);
     });
-    this.setLocation();
   }
 
-  public setLocation(): void {
-    this.locationService.getLocation(1).subscribe((res: Locations) => {
+  public setLocation(locationID: number): void {
+    this.locationService.getLocation(locationID).subscribe((res: Locations) => {
       console.log(res);
       this.location = res;
     });

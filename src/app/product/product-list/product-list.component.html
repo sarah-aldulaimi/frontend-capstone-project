@@ -194,39 +194,71 @@
     <div class="grid grid-cols-12 gap-6 xxl:gap-8">
       <div *ngFor="let product of products" class="col-span-12 md:col-span-6 xl:col-span-4">
         <mat-card class="ll-product">
-          <!-- <img
+          <form id="productForm" #productForm="ngForm" (ngSubmit)="addProductToCart(product.id, productForm)">
+            <!-- <img
             mat-card-image
             [src]="product?.images[0]"
             alt="{{ product.name }}"
             style="width: 100%; margin: 0 0 20px"
           /> -->
-          <mat-card-content class="flex">
-            <div class="flex-none w-10">
-              <!-- <img src="{{ product?.created_by?.avatar }}" alt="product?.created_by?.name" /> -->
-            </div>
-            <div class="flex-grow pl-3">
-              <h2 class="ll-product__name">
-                <a [routerLink]="['/products', product.id]">{{ product.name }}</a>
-              </h2>
-              <h4 class="ll-product__creator" style="text-overflow: ellipsis">{{ product?.description }}</h4>
-              <div class="flex justify-between mt-5">
-                <div class="ll-product__price-label">Price:</div>
-                <div class="ll-product__price text-accent font-bold">AED{{ product.price }}</div>
+            <mat-card-content class="flex">
+              <div class="flex-none w-10">
+                <!-- <img src="{{ product?.created_by?.avatar }}" alt="product?.created_by?.name" /> -->
               </div>
-            </div>
-          </mat-card-content>
-          <mat-card-actions class="ll-product__action flex justify-between">
-            <!-- <div class="flex-1 text-center flex items-center justify-center">
+              <div class="flex-grow pl-3">
+                <h2 class="ll-product__name" name="name" id="name" value="{{ product.name }}">
+                  {{ product.name }}
+                </h2>
+                <h4
+                  class="ll-product__creator"
+                  style="text-overflow: ellipsis"
+                  name="description"
+                  id="description"
+                  value="{{ product.description }}"
+                >
+                  {{ product?.description }}
+                </h4>
+                <div class="flex justify-between mt-5">
+                  <div class="ll-product__price-label">Count</div>
+                  <input
+                    style="width: 50%; border-radius: 3px; border-width: 1px"
+                    type="number"
+                    ngModel
+                    required
+                    name="qty"
+                    id="qty"
+                    min="1"
+                    max="1000"
+                    step="1"
+                    value="qty"
+                  />
+                </div>
+                <div class="flex justify-between mt-5">
+                  <div class="ll-product__price-label">Price:</div>
+                  <div
+                    class="ll-product__price text-accent font-bold"
+                    name="price"
+                    id="price"
+                    value="{{ product.price }}"
+                  >
+                    AED{{ product.price }}
+                  </div>
+                </div>
+              </div>
+            </mat-card-content>
+            <mat-card-actions class="ll-product__action flex justify-between">
+              <!-- <div class="flex-1 text-center flex items-center justify-center">
               <mat-icon color="warn">star</mat-icon> {{ product.rating }}/5
             </div> -->
-            <!--TODO: add products count-->
-            <div class="flex-1 text-center">
-              <button (click)="addProductToCart(product.id)" mat-raised-button color="warn" class="px-4">
-                <!-- <a [routerLink]="['/products', product.id]">t</a> -->
-                Add to shopping cart
-              </button>
-            </div>
-          </mat-card-actions>
+              <!--TODO: add products count-->
+              <div class="flex-1 text-center">
+                <button type="submit" [disabled]="!productForm.valid" mat-raised-button color="warn" class="px-4">
+                  <!-- <a [routerLink]="['/products', product.id]">t</a> -->
+                  Add to shopping cart
+                </button>
+              </div>
+            </mat-card-actions>
+          </form>
         </mat-card>
       </div>
     </div>

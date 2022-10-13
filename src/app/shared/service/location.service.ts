@@ -18,7 +18,7 @@ export class LocationService {
     return this.http.get<Locations>('http://localhost:8080/locations/' + id);
   }
 
-  public addLocation(location: Location): Observable<Location> {
-    return this.http.post<Location>(this.baseURL, location);
+  public addLocation(location: Locations): Observable<Locations> {
+    return this.http.post<Locations>(this.baseURL, location);
   }
 }

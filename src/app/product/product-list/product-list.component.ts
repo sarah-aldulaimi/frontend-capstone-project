@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { Category } from 'src/app/shared/data/category';
 import { Orders } from 'src/app/shared/data/orders';
 import { CategoryService } from 'src/app/shared/service/category.service';
@@ -71,14 +71,15 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  public addProductToCart(productID: number): void {
+  public addProductToCart(productID: number, addForm: NgForm): void {
+    console.log(addForm.value);
     let tempProduct: Products;
     this.products.forEach(element => {
-      if ((element.id = productID)) {
+      if (element.id == productID) {
         tempProduct = element;
       }
     });
-
+    console.log(tempProduct);
     if (localStorage.getItem('orderID') == null) {
       this.orderService.addOrder(this.newOrder).subscribe((res: Orders) => {
         this.orderID = res.id;

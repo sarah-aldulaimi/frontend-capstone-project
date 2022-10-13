@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 import { Orders } from 'src/app/shared/data/orders';
 import { Products } from 'src/app/shared/data/products';
 import { OrderService } from 'src/app/shared/service/order.service';
-import { ProductService } from 'src/app/shared/service/product.service';
 
 @Component({
   selector: 'app-dashboard-order',
@@ -38,7 +37,7 @@ export class DashboardOrderDetailsComponent implements OnInit {
   }
 
   public getProductsForOrder(): void {
-    this.orderService.viewAllProductsFromOrder(Number(localStorage.getItem('orderID'))).subscribe((res: Products[]) => {
+    this.orderService.viewAllProductsFromOrder(this.orderID).subscribe((res: Products[]) => {
       console.log(res);
       this.products = res;
       this.products.forEach(element => {

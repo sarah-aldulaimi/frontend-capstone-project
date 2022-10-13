@@ -38,7 +38,7 @@ export class DashboardOrderDetailsComponent implements OnInit {
   }
 
   public getProductsForOrder(): void {
-    this.orderService.viewAllProductsFromOrder(this.orderID).subscribe((res: Products[]) => {
+    this.orderService.viewAllProductsFromOrder(Number(localStorage.getItem('orderID'))).subscribe((res: Products[]) => {
       console.log(res);
       this.products = res;
       this.products.forEach(element => {

@@ -15,6 +15,7 @@ export class DashboardSavedItemComponent implements OnInit {
   shoppingCart: Products[];
   categories: Category[];
   categoryName: String;
+  orderID = +localStorage.getItem('orderID');
   constructor(private orderService: OrderService, private categoryService: CategoryService) {}
 
   ngOnInit(): void {
@@ -23,9 +24,7 @@ export class DashboardSavedItemComponent implements OnInit {
   }
 
   public viewCart(): void {
-    let orderID = +localStorage.getItem('orderID');
-    console.log(orderID);
-    this.orderService.viewAllProductsFromOrder(orderID).subscribe((res: Products[]) => {
+    this.orderService.viewAllProductsFromOrder(this.orderID).subscribe((res: Products[]) => {
       this.shoppingCart = res;
       this.shoppingCart.forEach(element => {
         element.productCount = Number(sessionStorage.getItem(element.id.toString()));
@@ -56,14 +55,16 @@ export class DashboardSavedItemComponent implements OnInit {
   }
 
   public purchaseOrder(): void {
-    this.orderService.getOrder(Number(localStorage.getItem('orderID'))).subscribe((res: Orders) => {
+    this.orderService.getOrder(this.orderID).subscribe((res: Orders) => {
       res.status = 'completed';
-      console.log(res.status);
-      this.orderService.editOrder(Number(localStorage.getItem('orderID')), res).subscribe((respone: Orders) => {
+      this.shoppingCart.forEach(element => {
+        res.productCount = res.productCount + element.productCount;
+      });
+      this.orderService.editOrder(this.orderID, res).subscribe((respone: Orders) => {
         console.log(respone);
       });
       localStorage.removeItem('orderID');
-      window.location.reload();
+      //window.location.reload();
     });
   }
 }

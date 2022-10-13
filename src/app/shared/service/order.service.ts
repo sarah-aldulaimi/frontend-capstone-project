@@ -42,4 +42,8 @@ export class OrderService {
   public editOrder(id: number, order: Orders): Observable<Orders> {
     return this.http.put<Orders>(this.baseURL + id, order);
   }
+
+  public viewAllOrdersByUser(userID: number): Observable<Orders[]> {
+    return this.http.get<Orders[]>(this.baseURL + 'users/' + userID);
+  }
 }

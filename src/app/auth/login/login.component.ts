@@ -5,6 +5,8 @@ import { UserService } from 'src/app/shared/service/user.service';
 import { User } from 'src/app/shared/data/user';
 import { Role, roles } from 'src/app/shared/data/role';
 import { RoleService } from 'src/app/shared/service/role.service';
+import { locations, Locations } from 'src/app/shared/data/locations';
+import { LocationService } from 'src/app/shared/service/location.service';
 
 @Component({
   selector: 'll-login',
@@ -15,11 +17,19 @@ export class LoginComponent implements OnInit {
   userRoles: Role[];
   isUserAdmin: boolean = false;
 
-  constructor(private userService: UserService, private router: Router, private roleService: RoleService) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private roleService: RoleService,
+    private locationService: LocationService
+  ) {}
 
   ngOnInit(): void {
     this.roleService.addRole(roles[0]).subscribe((res: Role) => {});
     this.roleService.addRole(roles[1]).subscribe((res: Role) => {});
+    for (let index = 0; index < locations.length; index++) {
+      this.locationService.addLocation(locations[index]).subscribe((res: Locations) => {});
+    }
   }
 
   public loginmyForm(addForm: NgForm): void {

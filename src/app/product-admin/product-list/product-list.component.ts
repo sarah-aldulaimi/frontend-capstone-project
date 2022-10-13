@@ -69,24 +69,45 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  public addProductToCart(productID: number): void {
-    let tempProduct: Products;
-    this.products.forEach(element => {
-      if ((element.id = productID)) {
-        tempProduct = element;
+  public addProductToCart(productID: number, addForm: NgForm): void {
+    this.productService.getProduct(productID).subscribe((res: Products) => {
+      if (addForm.value.name == '') {
+        addForm.value.name = res.name;
       }
-    });
-
-    if (localStorage.getItem('orderID') == null) {
-      this.orderService.addOrder(this.newOrder).subscribe((res: Orders) => {
-        localStorage.setItem('orderID', res.id.toString());
+      if (addForm.value.description == '') {
+        addForm.value.description = res.description;
+      }
+      if (addForm.value.price == '') {
+        addForm.value.price = res.price;
+      }
+      if (addForm.value.categoryID == '') {
+        addForm.value.categoryID = res.categoryID;
+      }
+      var countAsString = JSON.stringify(addForm.value);
+      var split1 = countAsString.split(':');
+      var split2 = split1[3].split('price');
+      var split3 = split2[0].split(',', 2);
+      let count = Number(split3[0]);
+      let tempProduct: Products;
+      this.products.forEach(element => {
+        if (element.id == productID) {
+          tempProduct = element;
+          sessionStorage.setItem(tempProduct.id.toString(), count.toString());
+        }
+      });
+      if (localStorage.getItem('orderID') == null) {
+        this.orderService.addOrder(this.newOrder).subscribe((res: Orders) => {
+          localStorage.setItem('orderID', res.id.toString());
+          let tempID = localStorage.getItem('orderID');
+          this.orderService.addProductToOrder(Number(tempID), tempProduct).subscribe((res: Orders) => {
+            console.log(res);
+          });
+        });
+      } else {
         let tempID = localStorage.getItem('orderID');
         this.orderService.addProductToOrder(Number(tempID), tempProduct).subscribe((res: Orders) => {});
-      });
-    } else {
-      let tempID = localStorage.getItem('orderID');
-      this.orderService.addProductToOrder(Number(tempID), tempProduct).subscribe((res: Orders) => {});
-    }
+      }
+    });
   }
 
   public deleteProduct(id: number): void {

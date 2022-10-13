@@ -85,13 +85,14 @@
                   <div class="ll-product__price-label">Count</div>
                   <input
                     style="width: 50%; border-radius: 3px"
+                    ngModel
                     type="number"
                     name="qty"
                     id="qty"
                     min="1"
                     max="1000"
                     step="1"
-                    value="1"
+                    value="productCount"
                   />
                 </div>
                 <div class="flex justify-between mt-5">
@@ -126,7 +127,12 @@
             </div> -->
               <!--TODO: add products count-->
               <div class="flex-1 text-center">
-                <button (click)="addProductToCart(product.id)" mat-raised-button color="primary" class="px-4">
+                <button
+                  (click)="addProductToCart(product.id, editProductForm)"
+                  mat-raised-button
+                  color="primary"
+                  class="px-4"
+                >
                   Add to shopping cart
                 </button>
                 <button type="sumbit" id="editButton" mat-raised-button color="warn" class="px-4">Edit</button>

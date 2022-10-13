@@ -20,7 +20,7 @@ export class ProductListComponent implements OnInit {
   categories: Category[] | undefined;
   userID: number = +localStorage.getItem('userId');
   newOrder = new Orders(this.userID);
-  orderID: number;
+
   categorySelectForm: FormGroup;
 
   constructor(
@@ -85,7 +85,6 @@ export class ProductListComponent implements OnInit {
     });
     if (localStorage.getItem('orderID') == null) {
       this.orderService.addOrder(this.newOrder).subscribe((res: Orders) => {
-        this.orderID = res.id;
         localStorage.setItem('orderID', res.id.toString());
         let tempID = localStorage.getItem('orderID');
         this.orderService.addProductToOrder(Number(tempID), tempProduct).subscribe((res: Orders) => {

@@ -47,43 +47,43 @@ export class ProductListAdminComponent implements OnInit {
     });
   }
 
-  public filterProducts(categoryID: number): void {
-    for (var product of this.products) {
-      if (product.categoryID == categoryID) {
-        this.filteredProducts.push(product);
-      }
-    }
-  }
+  // public filterProducts(categoryID: number): void {
+  //   for (var product of this.products) {
+  //     if (product.categoryID == categoryID) {
+  //       this.filteredProducts.push(product);
+  //     }
+  //   }
+  // }
 
-  public addProductToCart(productID: number): void {
-    let tempProduct: Products;
-    this.products.forEach(element => {
-      if ((element.id = productID)) {
-        tempProduct = element;
-      }
-    });
+  // public addProductToCart(productID: number): void {
+  //   let tempProduct: Products;
+  //   this.products.forEach(element => {
+  //     if ((element.id = productID)) {
+  //       tempProduct = element;
+  //     }
+  //   });
 
-    if (localStorage.getItem('orderID') == null) {
-      this.orderService.addOrder(this.newOrder).subscribe((res: Orders) => {
-        this.orderID = res.id;
-        localStorage.setItem('orderID', res.id.toString());
-        // console.log(localStorage.getItem('orderID'));
+  //   if (localStorage.getItem('orderID') == null) {
+  //     this.orderService.addOrder(this.newOrder).subscribe((res: Orders) => {
+  //       this.orderID = res.id;
+  //       localStorage.setItem('orderID', res.id.toString());
+  //       // console.log(localStorage.getItem('orderID'));
 
-        let tempID = localStorage.getItem('orderID');
-        // console.log(tempID);
-        this.orderService.addProductToOrder(Number(tempID), tempProduct).subscribe((res: Orders) => {
-          // console.log(res);
-        });
-      });
-    } else {
-      // console.log(localStorage.getItem('orderID'));
-      let tempID = localStorage.getItem('orderID');
-      // console.log(tempID);
-      this.orderService.addProductToOrder(Number(tempID), tempProduct).subscribe((res: Orders) => {
-        // console.log(res);
-      });
-    }
-  }
+  //       let tempID = localStorage.getItem('orderID');
+  //       // console.log(tempID);
+  //       this.orderService.addProductToOrder(Number(tempID), tempProduct).subscribe((res: Products[]) => {
+  //         // console.log(res);
+  //       });
+  //     });
+  //   } else {
+  //     // console.log(localStorage.getItem('orderID'));
+  //     let tempID = localStorage.getItem('orderID');
+  //     // console.log(tempID);
+  //     this.orderService.addProductToOrder(Number(tempID), tempProduct).subscribe((res: Products[]) => {
+  //       // console.log(res);
+  //     });
+  //   }
+  // }
 
   public addProduct(addForm: NgForm): void {
     this.productService.addProduct(addForm.value).subscribe((res: Products) => {

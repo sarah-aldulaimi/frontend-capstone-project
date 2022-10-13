@@ -35,6 +35,7 @@ export class SignupComponent implements OnInit {
   public registerUser(addForm: NgForm): void {
     this.userService.addUser(addForm.value).subscribe((res: User) => {
       localStorage.setItem('userId', res.id.toString());
+      localStorage.setItem('userRole', roles[1].name.toString());
       this.userService.assignUserRole(res.id, roles[1]).subscribe((response: Role) => {
         console.log(response);
         this.router.navigate(['/dashboard']);

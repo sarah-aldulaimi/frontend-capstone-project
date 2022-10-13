@@ -16,11 +16,13 @@ export class HeaderComponent implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit(): void {
+    console.log(this.menuList);
     if (localStorage.getItem('userRole') == 'Admin') {
       this.menuList = AdminmenuList;
     } else {
       this.menuList = staticMenuList;
     }
+    console.log(this.menuList);
     this.breakpointObserver.observe(['(max-width: 1199px)']).subscribe(({ matches }) => {
       this.isLessThenLargeDevice = matches;
     });

@@ -18,7 +18,7 @@ export class DashboardOrderDetailsComponent implements OnInit {
   private routeSub: Subscription;
   constructor(
     private orderService: OrderService,
-    private productService: ProductService,
+
     private route: ActivatedRoute
   ) {}
 
@@ -42,18 +42,9 @@ export class DashboardOrderDetailsComponent implements OnInit {
       console.log(res);
       this.products = res;
       this.products.forEach(element => {
-        element.productCount = this.getProductCount(element);
+        element.productCount = Number(sessionStorage.getItem(element.id.toString()));
       });
+      console.log(this.products);
     });
-  }
-
-  public getProductCount(product: Products): number {
-    let temp = 0;
-    for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i].id == product.id) {
-        temp++;
-      }
-    }
-    return temp;
   }
 }

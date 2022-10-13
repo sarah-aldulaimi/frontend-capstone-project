@@ -33,4 +33,21 @@ export class ProductService {
   public getFilteredProducts(categoryID: number): Observable<Products[]> {
     return this.http.get<Products[]>(this.baseURL + 'categories/' + categoryID);
   }
+
+  public getProductCount(products: Products[], productID: number): number {
+    let countNumber: number;
+    products.forEach(element => {
+      if ((element.id = productID)) {
+        countNumber = element.productCount;
+      }
+    });
+    return countNumber;
+  }
+  public setProductCount(products: Products[], productID: number, count: number): void {
+    products.forEach(element => {
+      if ((element.id = productID)) {
+        element.productCount = count;
+      }
+    });
+  }
 }

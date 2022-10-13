@@ -72,33 +72,29 @@ export class ProductListComponent implements OnInit {
   }
 
   public addProductToCart(productID: number, addForm: NgForm): void {
-    console.log(addForm.value);
+    var countAsString = JSON.stringify(addForm.value);
+    var split1 = countAsString.split(':', 2);
+    var split2 = split1[1].split('}', 2);
+    let count = Number(split2[0]);
     let tempProduct: Products;
     this.products.forEach(element => {
       if (element.id == productID) {
         tempProduct = element;
+        sessionStorage.setItem(tempProduct.id.toString(), count.toString());
       }
     });
-    console.log(tempProduct);
     if (localStorage.getItem('orderID') == null) {
       this.orderService.addOrder(this.newOrder).subscribe((res: Orders) => {
         this.orderID = res.id;
         localStorage.setItem('orderID', res.id.toString());
-        console.log(localStorage.getItem('orderID'));
-
         let tempID = localStorage.getItem('orderID');
-        console.log(tempID);
         this.orderService.addProductToOrder(Number(tempID), tempProduct).subscribe((res: Orders) => {
           console.log(res);
         });
       });
     } else {
-      // console.log(localStorage.getItem('orderID'));
       let tempID = localStorage.getItem('orderID');
-      // console.log(tempID);
-      this.orderService.addProductToOrder(Number(tempID), tempProduct).subscribe((res: Orders) => {
-        // console.log(res);
-      });
+      this.orderService.addProductToOrder(Number(tempID), tempProduct).subscribe((res: Orders) => {});
     }
   }
 }

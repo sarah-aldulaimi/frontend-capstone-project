@@ -14,28 +14,26 @@
     <div *ngIf="view === 'list'" class="table-inside">
       <div class="flex flex-col border ltLg:responsive">
         <div class="flex items-center p-4 border-b hover:bg-blue-100">
-          <div class="w-6/12 font-medium"><div class="pl-16 ml-3">Product</div></div>
-          <div class="w-2/12 font-medium">Category</div>
-          <div class="w-2/12 font-medium text-center">Price</div>
+          <div class="w-6/12 font-medium">Product</div>
+          <div class="w-6/12 font-medium">Description</div>
+          <div class="w-2/12 font-medium">Price</div>
           <div class="w-2/12 font-medium">Count</div>
           <!-- <div class="w-1/12 font-medium">Feedback</div> -->
           <div class="w-1/12"></div>
         </div>
         <div class="flex items-center p-4 border-b hover:bg-blue-100" *ngFor="let product of shoppingCart | slice: 0:9">
           <div class="w-6/12">
-            <a href="" class="flex hover:text-primary">
-              <div class="max-h-16 w-16 flex-none mr-3 border" *ngIf="product?.images">
-                <img [src]="product?.images[0]" alt="img" />
-              </div>
-              <h6 class="flex-auto">{{ product?.name }}</h6>
-            </a>
+            <div class="max-h-16 w-16 flex-none mr-3 border" *ngIf="product?.images">
+              <img [src]="product?.images[0]" alt="img" />
+            </div>
+            <h6 class="w-6/12">{{ product?.name }}</h6>
           </div>
-          <div class="w-2/12">{{ categoryName }}</div>
-          <div class="w-2/12 text-center">AED {{ product?.price }}</div>
+          <div class="w-6/12">{{ product.description }}</div>
+          <div class="w-2/12">AED {{ product?.price }}</div>
           <div class="w-2/12">
             <div class="flex items-center">
-              <mat-icon class="mr-1 text-lg leading-4 h-4 w-4 text-yellow-500">star_rate</mat-icon>
-              {{ product?.rating }}
+              <!-- <mat-icon class="mr-1 text-lg leading-4 h-4 w-4 text-yellow-500">star_rate</mat-icon> -->
+              {{ product.productCount }}
             </div>
           </div>
           <!-- <div class="w-1/12">
@@ -53,7 +51,7 @@
                 <mat-icon>dialpad</mat-icon>
                 <span>Details</span>
               </button>
-              <button mat-menu-item>
+              <button mat-menu-item (click)="removeItem(product.id)">
                 <mat-icon>delete</mat-icon>
                 <span>Delete</span>
               </button>

@@ -7,37 +7,6 @@
           <h4>Add Category</h4>
         </div>
         <div class="mt-3 flex">
-          <!-- <form
-            [formGroup]="categorySelectForm"
-            (ngSubmit)="filterProducts()"
-            id="categoryForm"
-            #categoryForm="ngForm"
-            class="flex-1 w-full sm:text-sm lg:text-xl border-gray-300 rounded-l-md py-3 px-6"
-          >
-            <select
-              formControlName="category"
-              class="flex-1 w-full sm:text-sm lg:text-xl border-gray-300 rounded-l-md py-3 px-6"
-            >
-              <option [ngValue]="null">All Categories</option>
-              <option *ngFor="let category of categories" [ngValue]="category.id">
-                {{ category.name }} - {{ category.description }}
-              </option>
-            </select>
-            <button
-              type="submit"
-              class="bg-primary w-24"
-              style="border-radius: 5px; box-shadow: 1px 2px 4px rgb(169, 169, 169)"
-            >
-              <mat-icon class="leading-8">search</mat-icon>
-            </button>
-          </form> -->
-          <!-- <button
-            (click)="navigateUsingButton('products-admin/add-product')"
-            class="bg-warn w-24"
-            style="border-radius: 5px; margin-left: 3px; box-shadow: 1px 2px 4px rgb(169, 169, 169)"
-          >
-            Add Product
-          </button> -->
           <button
             (click)="navigateUsingButton('category/add-category')"
             class="bg-warn w-24"
@@ -78,6 +47,7 @@
                   id="name"
                   placeholder="{{ category.name }}"
                   class="ll-product__name"
+                  style="width: 100%; border-radius: 3px; margin-bottom: 10px"
                 />
                 <input
                   type="text"
@@ -86,6 +56,7 @@
                   id="description"
                   placeholder="{{ category.description }}"
                   class="ll-product__creator"
+                  style="width: 100%; border-radius: 3px"
                 />
               </div>
             </mat-card-content>

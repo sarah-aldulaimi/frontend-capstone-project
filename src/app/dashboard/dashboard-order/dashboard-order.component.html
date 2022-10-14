@@ -8,9 +8,6 @@
             <span class="text-gray-800">Order Number</span>
           </th>
           <th>
-            <span class="text-gray-800">Name</span>
-          </th>
-          <th>
             <span class="text-gray-800">Price</span>
           </th>
 
@@ -29,9 +26,7 @@
           <td>
             <a class="text-primary" [routerLink]="[order.id]">#{{ order?.orderNumber }}</a>
           </td>
-          <td>
-            {{ order?.orderBy | titlecase }}
-          </td>
+
           <td>
             <span>AED{{ order?.totalCost }}</span>
           </td>

@@ -120,6 +120,9 @@ export class ProductListComponent implements OnInit {
       if (addForm.value.price == '') {
         addForm.value.price = res.price;
       }
+      if (addForm.value.categoryID == '') {
+        addForm.value.categoryID = res.categoryID;
+      }
       console.log(addForm.value);
       this.productService.editProduct(id, addForm.value).subscribe((response: Products) => {});
     });

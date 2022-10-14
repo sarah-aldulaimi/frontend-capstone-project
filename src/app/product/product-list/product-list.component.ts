@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { Category } from 'src/app/shared/data/category';
@@ -13,14 +14,12 @@ import { Products } from '../../shared/data/products';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
-  isLoaded: boolean;
   advanceSearchExpanded: boolean = false;
   products: Products[] | undefined;
   filteredProducts: Products[] | undefined;
   categories: Category[] | undefined;
   userID: number = +localStorage.getItem('userId');
   newOrder = new Orders(this.userID);
-
   categorySelectForm: FormGroup;
 
   constructor(
@@ -40,14 +39,12 @@ export class ProductListComponent implements OnInit {
 
   public getAllProducts(): void {
     this.productService.getAllProducts().subscribe((res: Products[]) => {
-      //console.log(res);
       this.products = res;
     });
   }
 
   public getAllCategories(): void {
     this.categoryService.getAllCategories().subscribe((res: Category[]) => {
-      //console.log(res);
       this.categories = res;
     });
   }
@@ -56,16 +53,13 @@ export class ProductListComponent implements OnInit {
     var categoryAsString = JSON.stringify(this.categorySelectForm.value);
     var split1 = categoryAsString.split(':', 2);
     var split2 = split1[1].split('}', 2);
-    console.log(split2[0]);
     let categoryID = Number(split2[0]);
-    console.log(categoryID);
     if (split2[0] != 'null') {
       this.productService.getFilteredProducts(categoryID).subscribe((res: Products[]) => {
         this.products = res;
       });
     } else {
       this.productService.getAllProducts().subscribe((res: Products[]) => {
-        console.log(res);
         this.products = res;
       });
     }
@@ -87,22 +81,16 @@ export class ProductListComponent implements OnInit {
       this.orderService.addOrder(this.newOrder).subscribe((response1: Orders) => {
         localStorage.setItem('orderID', response1.id.toString());
         this.orderService.getOrder(response1.id).subscribe((res: Orders) => {
-          res.productCount = res.productCount + count;
-          this.orderService.editOrder(res.id, res).subscribe((response: Orders) => {});
-          this.orderService.addProductToOrder(res.id, tempProduct).subscribe((r: Products[]) => {
+          this.orderService.addProductToOrder(res.id, tempProduct, count).subscribe((r: Products[]) => {
             this.orderService.viewAllProductsFromOrder(res.id).subscribe((resee: Products[]) => {});
           });
         });
       });
     } else {
       this.orderService.getOrder(Number(localStorage.getItem('orderID'))).subscribe((res: Orders) => {
-        res.productCount = res.productCount + count;
-        this.orderService.editOrder(res.id, res).subscribe((response: Orders) => {
-          this.orderService.addProductToOrder(response.id, tempProduct).subscribe((r: Products[]) => {
-            this.orderService.viewAllProductsFromOrder(res.id).subscribe((resee: Products[]) => {
-              console.log(response);
-              console.log(r);
-            });
+        this.orderService.addProductToOrder(res.id, tempProduct, count).subscribe((r: Products[]) => {
+          this.orderService.viewAllProductsFromOrder(res.id).subscribe((re: Products[]) => {
+            console.log(re);
           });
         });
       });

@@ -25,6 +25,7 @@ export class DashboardSavedItemComponent implements OnInit {
 
   public viewCart(): void {
     this.orderService.viewAllProductsFromOrder(this.orderID).subscribe((res: Products[]) => {
+      console.log(res);
       this.shoppingCart = res;
       this.shoppingCart.forEach(element => {
         element.productCount = Number(sessionStorage.getItem(element.id.toString()));
@@ -36,7 +37,6 @@ export class DashboardSavedItemComponent implements OnInit {
   public getCategories(): void {
     this.categoryService.getAllCategories().subscribe((res: Category[]) => {
       this.categories = res;
-      console.log(res);
     });
   }
 
@@ -57,14 +57,11 @@ export class DashboardSavedItemComponent implements OnInit {
   public purchaseOrder(): void {
     this.orderService.getOrder(this.orderID).subscribe((res: Orders) => {
       res.status = 'completed';
-      this.shoppingCart.forEach(element => {
-        res.productCount = res.productCount + element.productCount;
-      });
       this.orderService.editOrder(this.orderID, res).subscribe((respone: Orders) => {
         console.log(respone);
       });
       localStorage.removeItem('orderID');
-      //window.location.reload();
+      window.location.reload();
     });
   }
 }

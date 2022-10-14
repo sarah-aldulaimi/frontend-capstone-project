@@ -85,18 +85,16 @@ export class ProductListComponent implements OnInit {
       this.orderService.addOrder(this.newOrder).subscribe((response1: Orders) => {
         localStorage.setItem('orderID', response1.id.toString());
         this.orderService.getOrder(response1.id).subscribe((res: Orders) => {
-          res.productCount = res.productCount + count;
           this.orderService.editOrder(res.id, res).subscribe((response: Orders) => {});
-          this.orderService.addProductToOrder(res.id, tempProduct).subscribe((r: Products[]) => {
+          this.orderService.addProductToOrder(res.id, tempProduct, count).subscribe((r: Products[]) => {
             this.orderService.viewAllProductsFromOrder(res.id).subscribe((resee: Products[]) => {});
           });
         });
       });
     } else {
       this.orderService.getOrder(Number(localStorage.getItem('orderID'))).subscribe((res: Orders) => {
-        res.productCount = res.productCount + count;
         this.orderService.editOrder(res.id, res).subscribe((response: Orders) => {});
-        this.orderService.addProductToOrder(res.id, tempProduct).subscribe((r: Products[]) => {
+        this.orderService.addProductToOrder(res.id, tempProduct, count).subscribe((r: Products[]) => {
           this.orderService.viewAllProductsFromOrder(res.id).subscribe((resee: Products[]) => {});
         });
       });

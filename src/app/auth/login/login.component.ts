@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       });
       if (!doesAdminExist)
         this.userService.addUser(this.adminUser).subscribe((re: User) => {
-          console.log('i');
+          this.userService.assignUserRole(re.id, roles[0]).subscribe((res: Role) => {});
         });
     });
   }

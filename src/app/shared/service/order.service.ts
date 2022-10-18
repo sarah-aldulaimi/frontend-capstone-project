@@ -27,8 +27,8 @@ export class OrderService {
     return this.http.post<Products[]>(this.baseURL + id + '/products/' + productCount, product);
   }
 
-  public deleteProductFromOrder(id: number, productID: number): Observable<Orders> {
-    return this.http.delete<Orders>(this.baseURL + id + '/products' + '/' + productID);
+  public deleteProductFromOrder(id: number, productID: number, productCount: number): Observable<Orders> {
+    return this.http.delete<Orders>(this.baseURL + id + '/products' + '/' + productID + '/' + productCount);
   }
 
   public viewAllProductsFromOrder(id: number): Observable<Products[]> {

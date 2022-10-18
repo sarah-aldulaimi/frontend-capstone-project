@@ -16,6 +16,7 @@ import { LocationService } from 'src/app/shared/service/location.service';
 export class LoginComponent implements OnInit {
   userRoles: Role[];
   isUserAdmin: boolean = false;
+  adminUser = new User();
 
   constructor(
     private userService: UserService,
@@ -30,6 +31,19 @@ export class LoginComponent implements OnInit {
     for (let index = 0; index < locations.length; index++) {
       this.locationService.addLocation(locations[index]).subscribe((res: Locations) => {});
     }
+    this.userService.getAllUsers().subscribe((res: User[]) => {
+      console.log(res);
+      let doesAdminExist = false;
+      res.forEach(element => {
+        if (element.email == this.adminUser.email) {
+          doesAdminExist = true;
+        }
+      });
+      if (!doesAdminExist)
+        this.userService.addUser(this.adminUser).subscribe((re: User) => {
+          console.log('i');
+        });
+    });
   }
 
   public loginmyForm(addForm: NgForm): void {

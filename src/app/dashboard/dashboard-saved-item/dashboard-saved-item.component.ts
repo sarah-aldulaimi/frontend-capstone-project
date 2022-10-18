@@ -47,11 +47,16 @@ export class DashboardSavedItemComponent implements OnInit {
   }
 
   public removeItem(itemID: number): void {
-    this.orderService
-      .deleteProductFromOrder(Number(localStorage.getItem('orderID')), itemID)
-      .subscribe((res: Orders) => {
-        window.location.reload();
-      });
+    this.shoppingCart.forEach(element => {
+      if (element.id == itemID) {
+        var count = element.productCount;
+      }
+      this.orderService
+        .deleteProductFromOrder(Number(localStorage.getItem('orderID')), itemID, count)
+        .subscribe((res: Orders) => {
+          window.location.reload();
+        });
+    });
   }
 
   public purchaseOrder(): void {

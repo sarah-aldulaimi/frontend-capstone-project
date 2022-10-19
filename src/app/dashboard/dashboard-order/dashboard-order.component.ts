@@ -18,8 +18,15 @@ export class DashboardOrderComponent implements OnInit {
 
   public getOrders(): void {
     this.orderService.viewAllOrdersByUser(Number(localStorage.getItem('userId'))).subscribe((res: Orders[]) => {
-      console.log(res);
       this.orders = res;
+      console.log(this.orders);
+      if (this.orders.length == 0) {
+        document.getElementById('emptyOrders').style.display = 'inline';
+        document.getElementById('fullOrders').style.display = 'none';
+      } else {
+        document.getElementById('emptyOrders').style.display = 'none';
+        document.getElementById('fullOrders').style.display = 'inline';
+      }
     });
   }
 

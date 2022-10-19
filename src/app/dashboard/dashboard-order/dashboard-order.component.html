@@ -1,6 +1,9 @@
 <div>
   <h5 class="mb-3 font-medium">Orders</h5>
-  <div class="table-inside">
+  <div id="emptyOrders">
+    <h6 class="mb-3 font-medium">No orders to display</h6>
+  </div>
+  <div class="table-inside" id="fullOrders">
     <table class="order-table table-auto ltMd:responsive">
       <thead>
         <tr class="border text-left">
@@ -28,7 +31,7 @@
           </td>
 
           <td>
-            <span>AED{{ order?.totalCost }}</span>
+            <span>AED{{ order?.totalCost | number: '1.2-2' }}</span>
           </td>
           <td>
             <span>{{ order?.productCount }}</span>

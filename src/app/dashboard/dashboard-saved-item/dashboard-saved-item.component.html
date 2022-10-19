@@ -76,7 +76,7 @@
       </div>
       <div>
         <h6 id="totalCost " class="mb-3 font-medium" style="margin-right: 50px">
-          Total Cost: AED{{ order.totalCost }}
+          Total Cost: AED{{ order.totalCost | number: '1.2-2' }}
         </h6>
         <h6 class="mb-3 font-medium">Total Products: {{ order.productCount }}</h6>
         <button type="submit" (click)="purchaseOrder()" class="font-semibold" mat-flat-button color="warn">

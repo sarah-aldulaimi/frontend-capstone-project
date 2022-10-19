@@ -15,20 +15,13 @@ import { ProductService } from 'src/app/shared/service/product.service';
 export class DashboardSavedItemComponent implements OnInit {
   view = 'list';
   shoppingCart: Products[];
-  categories: Category[];
-  categoryName: String;
   order = new Orders(Number(localStorage.getItem('userId')));
   orderID = +localStorage.getItem('orderID');
-  constructor(
-    private orderService: OrderService,
-    private categoryService: CategoryService,
-    private productService: ProductService
-  ) {}
+  constructor(private orderService: OrderService, private categoryService: CategoryService) {}
 
   ngOnInit(): void {
     this.viewCart();
     this.viewOrder();
-    this.getCategories();
   }
 
   public viewCart(): void {
@@ -58,18 +51,6 @@ export class DashboardSavedItemComponent implements OnInit {
         document.getElementById('emptyShoppingCart').style.display = 'none';
       });
     }
-  }
-
-  public getCategories(): void {
-    this.categoryService.getAllCategories().subscribe((res: Category[]) => {
-      this.categories = res;
-    });
-  }
-
-  public displayCategoryForProduct(categoryID: number): void {
-    this.categories.forEach(element => {
-      if ((element.id = categoryID)) this.categoryName = element.name;
-    });
   }
 
   public removeItem(itemID: number): void {

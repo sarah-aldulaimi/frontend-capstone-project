@@ -1,5 +1,5 @@
-import { ThisReceiver } from '@angular/compiler';
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { IfStmt } from '@angular/compiler';
+import { Component, OnChanges, OnInit, SimpleChanges, Input } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { Category } from 'src/app/shared/data/category';
 import { Orders } from 'src/app/shared/data/orders';
@@ -42,6 +42,16 @@ export class ProductListComponent implements OnInit, OnChanges {
     });
   }
 
+  sendTheNewValue(productID: number, event) {
+    this.productService.getProduct(productID).subscribe((res: Products) => {
+      this.products.forEach(element => {
+        if (element.id == res.id) {
+          element.price = event.target.value * res.price;
+        }
+      });
+    });
+  }
+
   public getAllProducts(): void {
     this.productService.getAllProducts().subscribe((res: Products[]) => {
       this.products = res;
@@ -71,20 +81,29 @@ export class ProductListComponent implements OnInit, OnChanges {
   }
 
   public addProductToCart(productID: number, addForm: NgForm): void {
+    if (localStorage.getItem('userId') == null) {
+      alert('Please login first to place an order');
+      return;
+    }
     var countAsString = JSON.stringify(addForm.value);
     var split1 = countAsString.split(':', 2);
     var split2 = split1[1].split('}', 2);
     let count = Number(split2[0]);
     let tempProduct: Products;
-    this.products.forEach(element => {
-      if (element.id == productID) {
-        tempProduct = element;
-        sessionStorage.setItem(tempProduct.id.toString(), count.toString());
-      }
-    });
+
     if (localStorage.getItem('orderID') == null) {
       this.orderService.addOrder(this.newOrder).subscribe((response1: Orders) => {
         localStorage.setItem('orderID', response1.id.toString());
+        this.products.forEach(element => {
+          if (element.id == productID) {
+            tempProduct = element;
+            let orderID = localStorage.getItem('orderID');
+            let prevCount = +sessionStorage.getItem(orderID + tempProduct.id.toString());
+            let newCount = prevCount + count;
+            console.log(prevCount);
+            sessionStorage.setItem(orderID + tempProduct.id.toString(), newCount.toString());
+          }
+        });
         this.orderService.getOrder(response1.id).subscribe((res: Orders) => {
           this.orderService.addProductToOrder(res.id, tempProduct, count).subscribe((r: Products[]) => {
             this.orderService.viewAllProductsFromOrder(res.id).subscribe((resee: Products[]) => {});
@@ -93,6 +112,16 @@ export class ProductListComponent implements OnInit, OnChanges {
       });
     } else {
       this.orderService.getOrder(Number(localStorage.getItem('orderID'))).subscribe((res: Orders) => {
+        this.products.forEach(element => {
+          if (element.id == productID) {
+            tempProduct = element;
+            let orderID = localStorage.getItem('orderID');
+            let prevCount = +sessionStorage.getItem(orderID + tempProduct.id.toString());
+            let newCount = prevCount + count;
+            console.log(prevCount);
+            sessionStorage.setItem(orderID + tempProduct.id.toString(), newCount.toString());
+          }
+        });
         this.orderService.addProductToOrder(res.id, tempProduct, count).subscribe((r: Products[]) => {
           this.orderService.viewAllProductsFromOrder(res.id).subscribe((re: Products[]) => {
             console.log(re);

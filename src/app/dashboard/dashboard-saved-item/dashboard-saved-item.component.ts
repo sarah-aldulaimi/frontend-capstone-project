@@ -1,9 +1,11 @@
+import { isNgTemplate } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/shared/data/category';
 import { Orders } from 'src/app/shared/data/orders';
 import { Products } from 'src/app/shared/data/products';
 import { CategoryService } from 'src/app/shared/service/category.service';
 import { OrderService } from 'src/app/shared/service/order.service';
+import { ProductService } from 'src/app/shared/service/product.service';
 
 @Component({
   selector: 'll-dashboard-saved-item',
@@ -15,23 +17,47 @@ export class DashboardSavedItemComponent implements OnInit {
   shoppingCart: Products[];
   categories: Category[];
   categoryName: String;
+  order = new Orders(Number(localStorage.getItem('userId')));
   orderID = +localStorage.getItem('orderID');
-  constructor(private orderService: OrderService, private categoryService: CategoryService) {}
+  constructor(
+    private orderService: OrderService,
+    private categoryService: CategoryService,
+    private productService: ProductService
+  ) {}
 
   ngOnInit(): void {
     this.viewCart();
+    this.viewOrder();
     this.getCategories();
   }
 
   public viewCart(): void {
+    if (localStorage.getItem('orderID') == null) {
+      return;
+    }
     this.orderService.viewAllProductsFromOrder(this.orderID).subscribe((res: Products[]) => {
-      console.log(res);
-      this.shoppingCart = res;
+      this.shoppingCart = [...new Map(res.map(item => [item.id, item])).values()];
+      console.log(this.shoppingCart);
       this.shoppingCart.forEach(element => {
-        element.productCount = Number(sessionStorage.getItem(element.id.toString()));
-        console.log(element.productCount);
+        element.productCount = Number(sessionStorage.getItem(this.orderID + element.id.toString()));
+        element.price = element.productCount * element.price;
       });
     });
+  }
+
+  public viewOrder(): void {
+    if (localStorage.getItem('orderID') == null) {
+      document.getElementById('fullShoppingCart').style.display = 'none';
+      document.getElementById('emptyShoppingCart').style.display = 'inline';
+      return;
+    } else {
+      this.orderService.getOrder(this.orderID).subscribe((res: Orders) => {
+        this.order = res;
+        console.log(this.order);
+        document.getElementById('fullShoppingCart').style.display = 'inline';
+        document.getElementById('emptyShoppingCart').style.display = 'none';
+      });
+    }
   }
 
   public getCategories(): void {

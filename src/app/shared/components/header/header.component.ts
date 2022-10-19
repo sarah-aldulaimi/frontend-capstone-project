@@ -21,22 +21,25 @@ export class HeaderComponent implements OnInit {
       var slicedAdmin = AdminmenuList.slice(0, 2);
       var slicedNormal = staticMenuList.slice(0, 1);
       isUserLoggedIn = false;
-      document.getElementById('loggedIn').style.visibility = 'visible';
+      document.getElementById('loginGroup').style.display = 'inline';
+      document.getElementById('shpCart').style.display = 'none';
     }
     if (localStorage.getItem('userRole') == 'Admin') {
       if (isUserLoggedIn) {
         this.menuList = AdminmenuList;
-        document.getElementById('loginGroup').style.visibility = 'hidden';
+        document.getElementById('loginGroup').style.display = 'none';
       } else {
-        document.getElementById('loginGroup').style.visibility = 'visible';
+        document.getElementById('loginGroup').style.display = 'inline';
+        document.getElementById('shpCart').style.display = 'none';
         this.menuList = slicedAdmin;
       }
     } else {
       if (isUserLoggedIn) {
         this.menuList = staticMenuList;
-        document.getElementById('loginGroup').style.visibility = 'hidden';
+        document.getElementById('loginGroup').style.display = 'none';
       } else {
-        document.getElementById('loginGroup').style.visibility = 'visible';
+        document.getElementById('loginGroup').style.display = 'inline';
+        document.getElementById('shpCart').style.display = 'none';
         this.menuList = slicedNormal;
       }
     }

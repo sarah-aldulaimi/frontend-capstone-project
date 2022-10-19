@@ -221,6 +221,7 @@
                 <div class="flex justify-between mt-5">
                   <div class="ll-product__price-label">Count</div>
                   <input
+                    (input)="sendTheNewValue(product.id, $event)"
                     style="width: 50%; border-radius: 3px; border-width: 1px"
                     type="number"
                     ngModel
@@ -241,7 +242,7 @@
                     id="price"
                     value="{{ product.price }}"
                   >
-                    AED{{ product.price }}
+                    AED{{ product.price | number: '1.2-2' }}
                   </div>
                 </div>
               </div>

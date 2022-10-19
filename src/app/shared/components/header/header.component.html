@@ -23,21 +23,25 @@
       >
         <mat-icon>menu</mat-icon>
       </button>
-      <div class="hidden items-center md:flex ml-auto" id="loginGroup">
-        <a style="margin-right: 10px" [routerLink]="['dashboard/shopping-cart']"
-          ><img src="/assets/images/shop.png"
-        /></a>
-        <a
-          [routerLink]="['/auth/login']"
-          id="loginbtn"
-          mat-raised-button
-          color="warn"
-          class="text-lg font-bold py-2 px-5"
-          >Login</a
-        >
-        <a [routerLink]="['/auth/signup']" mat-raised-button color="accent" class="text-lg font-bold py-2 px-5 ml-2"
-          >Join Now</a
-        >
+      <div class="hidden items-center md:flex ml-auto">
+        <div id="shpCart">
+          <a style="margin-right: 10px" [routerLink]="['dashboard/shopping-cart']"
+            ><img src="/assets/images/shop.png"
+          /></a>
+        </div>
+        <div id="loginGroup">
+          <a
+            [routerLink]="['/auth/login']"
+            id="loginbtn"
+            mat-raised-button
+            color="warn"
+            class="text-lg font-bold py-2 px-5"
+            >Login</a
+          >
+          <a [routerLink]="['/auth/signup']" mat-raised-button color="accent" class="text-lg font-bold py-2 px-5 ml-2"
+            >Join Now</a
+          >
+        </div>
       </div>
     </div>
   </div>

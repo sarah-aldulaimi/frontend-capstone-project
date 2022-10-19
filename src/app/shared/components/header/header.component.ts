@@ -16,10 +16,29 @@ export class HeaderComponent implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit(): void {
+    let isUserLoggedIn = true;
+    if (localStorage.getItem('userId') == null) {
+      var slicedAdmin = AdminmenuList.slice(0, 2);
+      var slicedNormal = staticMenuList.slice(0, 1);
+      isUserLoggedIn = false;
+      document.getElementById('loggedIn').style.visibility = 'visible';
+    }
     if (localStorage.getItem('userRole') == 'Admin') {
-      this.menuList = AdminmenuList;
+      if (isUserLoggedIn) {
+        this.menuList = AdminmenuList;
+        document.getElementById('loginGroup').style.visibility = 'hidden';
+      } else {
+        document.getElementById('loginGroup').style.visibility = 'visible';
+        this.menuList = slicedAdmin;
+      }
     } else {
-      this.menuList = staticMenuList;
+      if (isUserLoggedIn) {
+        this.menuList = staticMenuList;
+        document.getElementById('loginGroup').style.visibility = 'hidden';
+      } else {
+        document.getElementById('loginGroup').style.visibility = 'visible';
+        this.menuList = slicedNormal;
+      }
     }
     this.breakpointObserver.observe(['(max-width: 1199px)']).subscribe(({ matches }) => {
       this.isLessThenLargeDevice = matches;

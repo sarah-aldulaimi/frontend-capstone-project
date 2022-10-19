@@ -11,10 +11,30 @@ export class SidenavComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+    let isUserLoggedIn = true;
+    if (localStorage.getItem('userId') == null) {
+      var slicedAdmin = AdminmenuList.slice(0, 2);
+      var slicedNormal = staticMenuList.slice(0, 1);
+      isUserLoggedIn = false;
+      document.getElementById('loggedIn').style.visibility = 'visible';
+    }
     if (localStorage.getItem('userRole') == 'Admin') {
-      this.navList = AdminmenuList;
+      if (isUserLoggedIn) {
+        this.navList = AdminmenuList;
+        document.getElementById('loggedIn').style.visibility = 'hidden';
+      } else {
+        document.getElementById('loggedIn').style.visibility = 'visible';
+        this.navList = slicedAdmin;
+      }
     } else {
-      this.navList = staticMenuList;
+      if (isUserLoggedIn) {
+        console.log(isUserLoggedIn);
+        this.navList = staticMenuList;
+        document.getElementById('loggedIn').style.visibility = 'hidden';
+      } else {
+        document.getElementById('loggedIn').style.visibility = 'visible';
+        this.navList = slicedNormal;
+      }
     }
   }
 }

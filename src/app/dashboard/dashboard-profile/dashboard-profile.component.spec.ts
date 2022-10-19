@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DashboardProfileComponent } from './dashboard-profile.component';
 
 describe('DashboardProfileComponent', () => {
@@ -8,9 +9,9 @@ describe('DashboardProfileComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DashboardProfileComponent ]
-    })
-    .compileComponents();
+      declarations: [DashboardProfileComponent],
+      imports: [RouterTestingModule, HttpClientTestingModule]
+    }).compileComponents();
   });
 
   beforeEach(() => {

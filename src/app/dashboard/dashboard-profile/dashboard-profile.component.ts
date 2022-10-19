@@ -11,9 +11,9 @@ import { UserService } from 'src/app/shared/service/user.service';
   styleUrls: ['./dashboard-profile.component.scss']
 })
 export class DashboardProfileComponent implements OnInit {
-  userInfo: User;
+  userInfo = new User();
   id: number;
-  location: Locations;
+  location = new Locations();
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
@@ -28,8 +28,10 @@ export class DashboardProfileComponent implements OnInit {
   }
 
   public getUser(): void {
+    if (this.userInfo == undefined) {
+      return;
+    }
     this.userService.getUser(Number(localStorage.getItem('userId'))).subscribe((res: User) => {
-      console.log(res);
       this.userInfo = res;
       this.setLocation(this.userInfo.locationId);
     });
@@ -37,7 +39,6 @@ export class DashboardProfileComponent implements OnInit {
 
   public setLocation(locationID: number): void {
     this.locationService.getLocation(locationID).subscribe((res: Locations) => {
-      console.log(res);
       this.location = res;
     });
   }

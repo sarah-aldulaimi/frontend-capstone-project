@@ -19,12 +19,12 @@ export class OrderService {
     return this.http.get<Orders>(this.baseURL + id);
   }
 
-  public addOrder(order: Orders): Observable<Orders> {
-    return this.http.post<Orders>(this.baseURL, order);
+  public addOrder(order: Orders): Observable<any> {
+    return this.http.post<any>(this.baseURL, order);
   }
 
-  public addProductToOrder(id: number, product: Products, productCount: number): Observable<Products[]> {
-    return this.http.post<Products[]>(this.baseURL + id + '/products/' + productCount, product);
+  public addProductToOrder(id: number, product: Products, productCount: number): Observable<any> {
+    return this.http.post<any>(this.baseURL + id + '/products/' + productCount, product);
   }
 
   public deleteProductFromOrder(id: number, productID: number, productCount: number): Observable<Orders> {

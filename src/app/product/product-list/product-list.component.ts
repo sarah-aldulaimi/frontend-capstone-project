@@ -92,8 +92,8 @@ export class ProductListComponent implements OnInit, OnChanges {
     let tempProduct: Products;
 
     if (localStorage.getItem('orderID') == null) {
-      this.orderService.addOrder(this.newOrder).subscribe((response1: Orders) => {
-        localStorage.setItem('orderID', response1.id.toString());
+      this.orderService.addOrder(this.newOrder).subscribe(res => {
+        localStorage.setItem('orderID', res.toString());
         this.products.forEach(element => {
           if (element.id == productID) {
             tempProduct = element;
@@ -104,8 +104,8 @@ export class ProductListComponent implements OnInit, OnChanges {
             sessionStorage.setItem(orderID + tempProduct.id.toString(), newCount.toString());
           }
         });
-        this.orderService.getOrder(response1.id).subscribe((res: Orders) => {
-          this.orderService.addProductToOrder(res.id, tempProduct, count).subscribe((r: Products[]) => {
+        this.orderService.getOrder(res).subscribe((res: Orders) => {
+          this.orderService.addProductToOrder(res.id, tempProduct, count).subscribe(r => {
             this.orderService.viewAllProductsFromOrder(res.id).subscribe((resee: Products[]) => {});
           });
         });
@@ -122,10 +122,8 @@ export class ProductListComponent implements OnInit, OnChanges {
             sessionStorage.setItem(orderID + tempProduct.id.toString(), newCount.toString());
           }
         });
-        this.orderService.addProductToOrder(res.id, tempProduct, count).subscribe((r: Products[]) => {
-          this.orderService.viewAllProductsFromOrder(res.id).subscribe((re: Products[]) => {
-            console.log(re);
-          });
+        this.orderService.addProductToOrder(res.id, tempProduct, count).subscribe(r => {
+          this.orderService.viewAllProductsFromOrder(res.id).subscribe((re: Products[]) => {});
         });
       });
     }

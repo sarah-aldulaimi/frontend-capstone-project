@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Category } from '../data/category';
 
 @Injectable({
@@ -19,7 +20,20 @@ export class CategoryService {
   }
 
   public addCategory(category: Category): Observable<Category> {
-    return this.http.post<Category>(this.baseURL, category);
+    return this.http.post<Category>(this.baseURL, category).pipe(
+      catchError(error => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.error instanceof ErrorEvent) {
+            console.error('Error Event');
+          } else {
+            alert(`${error.error}`);
+          }
+        } else {
+          console.error('some thing else happened');
+        }
+        return throwError(error);
+      })
+    );
   }
 
   public deleteCategory(id: number): Observable<Category> {

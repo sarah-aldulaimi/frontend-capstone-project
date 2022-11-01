@@ -17,13 +17,16 @@ export class SidenavComponent implements OnInit {
       var slicedNormal = staticMenuList.slice(0, 1);
       isUserLoggedIn = false;
       document.getElementById('loggedIn').style.visibility = 'visible';
+      document.getElementById('shpLoggedIn').style.display = 'none';
     }
     if (localStorage.getItem('userRole') == 'Admin') {
       if (isUserLoggedIn) {
         this.navList = AdminmenuList;
         document.getElementById('loggedIn').style.visibility = 'hidden';
+        document.getElementById('shpLoggedIn').style.display = 'inline';
       } else {
         document.getElementById('loggedIn').style.visibility = 'visible';
+        document.getElementById('shpLoggedIn').style.visibility = 'none';
         this.navList = slicedAdmin;
       }
     } else {
@@ -31,8 +34,10 @@ export class SidenavComponent implements OnInit {
         console.log(isUserLoggedIn);
         this.navList = staticMenuList;
         document.getElementById('loggedIn').style.visibility = 'hidden';
+        document.getElementById('shpLoggedIn').style.display = 'inline';
       } else {
         document.getElementById('loggedIn').style.visibility = 'visible';
+        document.getElementById('shpLoggedIn').style.display = 'none';
         this.navList = slicedNormal;
       }
     }

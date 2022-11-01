@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Products } from '../data/products';
 
 @Injectable({
@@ -15,39 +17,74 @@ export class ProductService {
   }
 
   public getProduct(id: number): Observable<Products> {
-    return this.http.get<Products>(this.baseURL + id);
+    return this.http.get<Products>(this.baseURL + id).pipe(
+      catchError(error => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.error instanceof ErrorEvent) {
+            console.error('Error Event');
+          } else {
+            alert(`${error.error}`);
+          }
+        } else {
+          console.error('some thing else happened');
+        }
+        return throwError(error);
+      })
+    );
   }
 
   public addProduct(product: Products): Observable<Products> {
-    return this.http.post<Products>(this.baseURL, product);
+    return this.http.post<Products>(this.baseURL, product).pipe(
+      catchError(error => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.error instanceof ErrorEvent) {
+            console.error('Error Event');
+          } else {
+            alert(`${error.error}`);
+          }
+        } else {
+          console.error('some thing else happened');
+        }
+        return throwError(error);
+      })
+    );
   }
 
   public deleteProduct(id: number): Observable<Products> {
-    return this.http.delete<Products>(this.baseURL + id);
+    return this.http.delete<Products>(this.baseURL + id).pipe(
+      catchError(error => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.error instanceof ErrorEvent) {
+            console.error('Error Event');
+          } else {
+            alert(`${error.error}`);
+          }
+        } else {
+          console.error('some thing else happened');
+        }
+        return throwError(error);
+      })
+    );
   }
 
   public editProduct(id: number, product: Products): Observable<Products> {
-    return this.http.put<Products>(this.baseURL + id, product);
+    return this.http.put<Products>(this.baseURL + id, product).pipe(
+      catchError(error => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.error instanceof ErrorEvent) {
+            console.error('Error Event');
+          } else {
+            alert(`${error.error}`);
+          }
+        } else {
+          console.error('some thing else happened');
+        }
+        return throwError(error);
+      })
+    );
   }
 
   public getFilteredProducts(categoryID: number): Observable<Products[]> {
     return this.http.get<Products[]>(this.baseURL + 'categories/' + categoryID);
-  }
-
-  public getProductCount(products: Products[], productID: number): number {
-    let countNumber: number;
-    products.forEach(element => {
-      if ((element.id = productID)) {
-        countNumber = element.productCount;
-      }
-    });
-    return countNumber;
-  }
-  public setProductCount(products: Products[], productID: number, count: number): void {
-    products.forEach(element => {
-      if ((element.id = productID)) {
-        element.productCount = count;
-      }
-    });
   }
 }

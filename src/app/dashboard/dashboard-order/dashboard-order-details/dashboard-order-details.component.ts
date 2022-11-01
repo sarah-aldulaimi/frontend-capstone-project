@@ -43,8 +43,8 @@ export class DashboardOrderDetailsComponent implements OnInit {
       console.log(this.products);
       this.products.forEach(element => {
         element.productCount = Number(sessionStorage.getItem(this.orderID + element.id.toString()));
+        console.log(sessionStorage.getItem(this.orderID + element.id.toString()));
       });
-      console.log(this.products);
     });
   }
 }

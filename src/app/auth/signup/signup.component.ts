@@ -24,20 +24,24 @@ export class SignupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getLocations();
-    this.roleService.addRole(roles[0]).subscribe((res: Role) => {});
-    this.roleService.addRole(roles[1]).subscribe((res: Role) => {});
-
     for (let index = 0; index < locations.length; index++) {
       this.locationService.addLocation(locations[index]).subscribe((res: Locations) => {});
     }
+    this.getLocations();
+    this.roleService.getAllRoles().subscribe((res: Role[]) => {
+      if (res.length == 0) {
+        console.log('test');
+        this.roleService.addRole(roles[0]).subscribe((res: Role) => {});
+        this.roleService.addRole(roles[1]).subscribe((res: Role) => {});
+      }
+    });
   }
   public registerUser(addForm: NgForm): void {
-    this.userService.addUser(addForm.value).subscribe((res: User) => {
-      localStorage.setItem('userId', res.id.toString());
+    this.userService.addUser(addForm.value).subscribe(res => {
+      const userID = res?.toString() || '';
+      localStorage.setItem('userId', userID);
       localStorage.setItem('userRole', roles[1].name.toString());
-      this.userService.assignUserRole(res.id, roles[1]).subscribe((response: Role) => {
-        console.log(response);
+      this.userService.assignUserRole(res, roles[1]).subscribe(response => {
         this.router.navigate(['/dashboard']);
       });
     });

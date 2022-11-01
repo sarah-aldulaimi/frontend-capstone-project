@@ -30,7 +30,7 @@ const DashboardChildrenRoute: Routes = [
     component: DashboardOrderComponent
   },
   {
-    path: 'orders/:id',
+    path: 'orders/:orderParams',
     component: DashboardOrderDetailsComponent
   }
 ];

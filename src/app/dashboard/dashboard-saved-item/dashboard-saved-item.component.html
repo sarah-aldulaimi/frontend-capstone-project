@@ -79,7 +79,14 @@
           Total Cost: AED{{ order.totalCost | number: '1.2-2' }}
         </h6>
         <h6 class="mb-3 font-medium">Total Products: {{ order.productCount }}</h6>
-        <button type="submit" (click)="purchaseOrder()" class="font-semibold" mat-flat-button color="warn">
+        <button
+          id="purchasBtn"
+          type="submit"
+          (click)="purchaseOrder()"
+          class="font-semibold"
+          mat-flat-button
+          color="warn"
+        >
           <!-- <a [routerLink]="'/dashboard/orders'" class="font-semibold" mat-flat-button color="warn">Purchase</a> -->
           Purchase
         </button>

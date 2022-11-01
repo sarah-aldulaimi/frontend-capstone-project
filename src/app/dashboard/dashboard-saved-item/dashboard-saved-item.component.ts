@@ -1,11 +1,9 @@
-import { isNgTemplate } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { Category } from 'src/app/shared/data/category';
+import { Router } from '@angular/router';
 import { Orders } from 'src/app/shared/data/orders';
 import { Products } from 'src/app/shared/data/products';
 import { CategoryService } from 'src/app/shared/service/category.service';
 import { OrderService } from 'src/app/shared/service/order.service';
-import { ProductService } from 'src/app/shared/service/product.service';
 
 @Component({
   selector: 'll-dashboard-saved-item',
@@ -17,7 +15,7 @@ export class DashboardSavedItemComponent implements OnInit {
   shoppingCart: Products[];
   order = new Orders(Number(localStorage.getItem('userId')));
   orderID = +localStorage.getItem('orderID');
-  constructor(private orderService: OrderService, private categoryService: CategoryService) {}
+  constructor(private orderService: OrderService, private categoryService: CategoryService, private router: Router) {}
 
   ngOnInit(): void {
     this.viewCart();
@@ -46,6 +44,9 @@ export class DashboardSavedItemComponent implements OnInit {
     } else {
       this.orderService.getOrder(this.orderID).subscribe((res: Orders) => {
         this.order = res;
+        // if (this.order.productCount == 0) {
+        //   document.getElementById('purchasBtn').= true;
+        // }
         console.log(this.order);
         document.getElementById('fullShoppingCart').style.display = 'inline';
         document.getElementById('emptyShoppingCart').style.display = 'none';
@@ -61,6 +62,9 @@ export class DashboardSavedItemComponent implements OnInit {
       this.orderService
         .deleteProductFromOrder(Number(localStorage.getItem('orderID')), itemID, count)
         .subscribe((res: Orders) => {
+          this.orderService.getOrder(this.orderID).subscribe((res: Orders) => {
+            console.log(res);
+          });
           window.location.reload();
         });
     });
@@ -73,7 +77,7 @@ export class DashboardSavedItemComponent implements OnInit {
         console.log(respone);
       });
       localStorage.removeItem('orderID');
-      window.location.reload();
+      this.router.navigate(['orders']);
     });
   }
 }

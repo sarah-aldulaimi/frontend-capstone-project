@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit {
       if (isUserLoggedIn) {
         this.menuList = AdminmenuList;
         document.getElementById('loginGroup').style.display = 'none';
+        document.getElementById('shpCart').style.display = 'none';
       } else {
         document.getElementById('loginGroup').style.display = 'inline';
         document.getElementById('shpCart').style.display = 'none';

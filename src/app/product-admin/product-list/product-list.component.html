@@ -81,20 +81,22 @@
                     class="ll-product__creator"
                   />
                 </div>
-                <div class="flex justify-between mt-5">
+                <!-- <div class="flex justify-between mt-5">
                   <div class="ll-product__price-label">Count</div>
                   <input
-                    style="width: 50%; border-radius: 3px"
-                    ngModel
+                    (input)="sendTheNewValue(product.id, $event)"
+                    style="width: 50%; border-radius: 3px; border-width: 1px"
                     type="number"
+                    ngModel
+                    required
                     name="qty"
                     id="qty"
                     min="1"
                     max="1000"
                     step="1"
-                    value="productCount"
+                    value="qty"
                   />
-                </div>
+                </div> -->
                 <div class="flex justify-between mt-5">
                   <div class="ll-product__price-label">Price: AED</div>
                   <input
@@ -102,7 +104,7 @@
                     ngModel
                     name="price"
                     id="price"
-                    placeholder="{{ product.price }}"
+                    placeholder="{{ product.price | number: '1.2-2' }}"
                     style="width: 50%; border-radius: 3px"
                     class="ll-product__price text-accent font-bold"
                   />
@@ -127,16 +129,22 @@
             </div> -->
               <!--TODO: add products count-->
               <div class="flex-1 text-center">
-                <button
+                <!-- <button
                   (click)="addProductToCart(product.id, editProductForm)"
                   mat-raised-button
                   color="primary"
                   class="px-4"
                 >
                   Add to shopping cart
-                </button>
+                </button> -->
                 <button type="sumbit" id="editButton" mat-raised-button color="warn" class="px-4">Edit</button>
-                <button (click)="deleteProduct(product.id)" mat-raised-button color="accent" class="px-4">
+                <button
+                  id="deleteButton"
+                  (click)="deleteProduct(product.id)"
+                  mat-raised-button
+                  color="accent"
+                  class="px-4"
+                >
                   Delete
                 </button>
               </div>

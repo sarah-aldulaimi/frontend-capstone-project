@@ -98,9 +98,9 @@ export class ProductListComponent implements OnInit, OnChanges {
           if (element.id == productID) {
             tempProduct = element;
             let orderID = localStorage.getItem('orderID');
+
             let prevCount = +sessionStorage.getItem(orderID + tempProduct.id.toString());
             let newCount = prevCount + count;
-            console.log(prevCount);
             sessionStorage.setItem(orderID + tempProduct.id.toString(), newCount.toString());
           }
         });
@@ -118,7 +118,6 @@ export class ProductListComponent implements OnInit, OnChanges {
             let orderID = localStorage.getItem('orderID');
             let prevCount = +sessionStorage.getItem(orderID + tempProduct.id.toString());
             let newCount = prevCount + count;
-            console.log(prevCount);
             sessionStorage.setItem(orderID + tempProduct.id.toString(), newCount.toString());
           }
         });

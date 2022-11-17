@@ -31,8 +31,12 @@ export class DashboardLayoutComponent implements OnInit {
     });
     if (localStorage.getItem('userRole') == 'Admin') {
       this.menuList = AdminmenuList;
+      document.getElementById('adminView').style.display = 'none';
+      document.getElementById('menuList').style.display = 'none';
     } else {
       this.menuList = staticMenuList;
+      document.getElementById('adminView').style.display = 'inline';
+      document.getElementById('menuList').style.display = 'inline';
     }
   }
   onLogout(): void {

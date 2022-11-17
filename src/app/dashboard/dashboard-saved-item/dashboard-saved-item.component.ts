@@ -77,7 +77,7 @@ export class DashboardSavedItemComponent implements OnInit {
         console.log(respone);
       });
       localStorage.removeItem('orderID');
-      this.router.navigate(['orders']);
+      window.location.reload();
     });
   }
 }

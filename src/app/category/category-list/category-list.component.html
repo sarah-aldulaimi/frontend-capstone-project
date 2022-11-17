@@ -1,5 +1,5 @@
 <div style="height: 100px"></div>
-<div class="ll-search pb-6">
+<!-- <div class="ll-search pb-6">
   <div class="container">
     <div class="border overflow-hidden sm:rounded-md p-5">
       <div class="mb-3">
@@ -11,6 +11,51 @@
             (click)="navigateUsingButton('category/add-category')"
             class="bg-warn w-24"
             style="border-radius: 5px; margin-left: 1050px; box-shadow: 1px 2px 4px rgb(169, 169, 169)"
+          >
+            Add Category
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="ll-search pb-6">
+  <div class="container">
+    <div class="border overflow-hidden sm:rounded-md p-5">
+      <div class="mb-3">
+        <div class="flex justify-between flex-wrap">
+          <h4>Add Category</h4>
+        </div>
+        <div class="mt-3 flex">
+          <form
+            style="visibility: hidden"
+            [formGroup]="categorySelectForm"
+            (ngSubmit)="filterProducts()"
+            id="categoryForm"
+            #categoryForm="ngForm"
+            class="flex-1 w-full sm:text-sm lg:text-xl border-gray-300 rounded-l-md py-3 px-6"
+          >
+            <select
+              formControlName="category"
+              class="flex-1 w-full sm:text-sm lg:text-xl border-gray-300 rounded-l-md py-3 px-6"
+            >
+              <option [ngValue]="null">All Categories</option>
+              <option *ngFor="let category of categories" [ngValue]="category.id">
+                {{ category.name }} - {{ category.description }}
+              </option>
+            </select>
+            <button
+              type="submit"
+              class="bg-primary w-24"
+              style="border-radius: 5px; box-shadow: 1px 2px 4px rgb(169, 169, 169)"
+            >
+              <mat-icon class="leading-8">search</mat-icon>
+            </button>
+          </form>
+          <button
+            (click)="navigateUsingButton('category/add-category')"
+            class="bg-warn w-24"
+            style="border-radius: 5px; margin-left: 3px; box-shadow: 1px 2px 4px rgb(169, 169, 169)"
           >
             Add Category
           </button>

@@ -62,23 +62,22 @@ export class CategoryListComponent implements OnInit {
   }
 
   public deleteCategory(id: number): void {
-    this.categoryService.deleteCategory(id).subscribe((res: Category) => {
+    this.categoryService.deleteCategory(id).subscribe(res => {
       window.location.reload();
     });
   }
 
   public editThisCategory(id: number, addForm: NgForm): void {
     this.categoryService.getCategory(id).subscribe((res: Category) => {
-      console.log(addForm.value);
-      console.log(res);
       if (addForm.value.name == '') {
         addForm.value.name = res.name;
       }
       if (addForm.value.description == '') {
         addForm.value.description = res.description;
       }
-      console.log(addForm.value);
-      this.categoryService.editCategory(id, addForm.value).subscribe((response: Category) => {});
+      this.categoryService.editCategory(id, addForm.value).subscribe(response => {
+        alert('This category has succesfully been edited');
+      });
     });
   }
 

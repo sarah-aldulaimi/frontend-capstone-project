@@ -23,13 +23,14 @@ export class DashboardOrderDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {
-      this.orderID = params['id']; //log the value of id
+      this.orderID = params['orderParams']; //log the value of id
     });
     this.getOrder();
     this.getProductsForOrder();
   }
 
   public getOrder(): void {
+    console.log(this.orderID);
     this.orderService.getOrder(this.orderID).subscribe((res: Orders) => {
       console.log(res);
       this.order = res;

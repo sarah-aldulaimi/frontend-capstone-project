@@ -18,6 +18,7 @@ export class DashboardOrderComponent implements OnInit {
 
   public getOrders(): void {
     this.orderService.viewAllOrdersByUser(Number(localStorage.getItem('userId'))).subscribe((res: Orders[]) => {
+      console.log(res);
       this.orders = res;
       console.log(this.orders);
       if (this.orders.length == 0) {

@@ -33,8 +33,8 @@ export class ProductService {
     );
   }
 
-  public addProduct(product: Products): Observable<Products> {
-    return this.http.post<Products>(this.baseURL, product).pipe(
+  public addProduct(product: Products): Observable<any> {
+    return this.http.post<any>(this.baseURL, product).pipe(
       catchError(error => {
         if (error instanceof HttpErrorResponse) {
           if (error.error instanceof ErrorEvent) {
@@ -50,8 +50,8 @@ export class ProductService {
     );
   }
 
-  public deleteProduct(id: number): Observable<Products> {
-    return this.http.delete<Products>(this.baseURL + id).pipe(
+  public deleteProduct(id: number): Observable<any> {
+    return this.http.delete<any>(this.baseURL + id).pipe(
       catchError(error => {
         if (error instanceof HttpErrorResponse) {
           if (error.error instanceof ErrorEvent) {
@@ -67,13 +67,14 @@ export class ProductService {
     );
   }
 
-  public editProduct(id: number, product: Products): Observable<Products> {
-    return this.http.put<Products>(this.baseURL + id, product).pipe(
+  public editProduct(id: number, product: Products): Observable<any> {
+    return this.http.put<any>(this.baseURL + id, product).pipe(
       catchError(error => {
         if (error instanceof HttpErrorResponse) {
           if (error.error instanceof ErrorEvent) {
             console.error('Error Event');
           } else {
+            console.log('Im not supponsed to be called');
             alert(`${error.error}`);
           }
         } else {

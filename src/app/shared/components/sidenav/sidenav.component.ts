@@ -23,10 +23,10 @@ export class SidenavComponent implements OnInit {
       if (isUserLoggedIn) {
         this.navList = AdminmenuList;
         document.getElementById('loggedIn').style.visibility = 'hidden';
-        document.getElementById('shpLoggedIn').style.display = 'inline';
+        document.getElementById('shpLoggedIn').style.visibility = 'hidden';
       } else {
         document.getElementById('loggedIn').style.visibility = 'visible';
-        document.getElementById('shpLoggedIn').style.visibility = 'none';
+        document.getElementById('shpLoggedIn').style.visibility = 'hidden';
         this.navList = slicedAdmin;
       }
     } else {

@@ -17,20 +17,7 @@ export class ProductService {
   }
 
   public getProduct(id: number): Observable<Products> {
-    return this.http.get<Products>(this.baseURL + id).pipe(
-      catchError(error => {
-        if (error instanceof HttpErrorResponse) {
-          if (error.error instanceof ErrorEvent) {
-            console.error('Error Event');
-          } else {
-            alert(`${error.error}`);
-          }
-        } else {
-          console.error('some thing else happened');
-        }
-        return throwError(error);
-      })
-    );
+    return this.http.get<Products>(this.baseURL + id);
   }
 
   public addProduct(product: Products): Observable<any> {
@@ -74,7 +61,6 @@ export class ProductService {
           if (error.error instanceof ErrorEvent) {
             console.error('Error Event');
           } else {
-            console.log('Im not supponsed to be called');
             alert(`${error.error}`);
           }
         } else {

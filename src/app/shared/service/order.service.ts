@@ -69,20 +69,7 @@ export class OrderService {
   }
 
   public deleteProductFromOrder(id: number, productID: number, productCount: number): Observable<any> {
-    return this.http.delete<any>(this.baseURL + id + '/products' + '/' + productID + '/' + productCount).pipe(
-      catchError(error => {
-        if (error instanceof HttpErrorResponse) {
-          if (error.error instanceof ErrorEvent) {
-            console.error('Error Event');
-          } else {
-            alert(`${error.error}`);
-          }
-        } else {
-          console.error('some thing else happened');
-        }
-        return throwError(error);
-      })
-    );
+    return this.http.delete<any>(this.baseURL + id + '/products' + '/' + productID + '/' + productCount);
   }
 
   public viewAllProductsFromOrder(id: number): Observable<Products[]> {

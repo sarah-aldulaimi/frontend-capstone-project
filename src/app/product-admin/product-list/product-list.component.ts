@@ -22,7 +22,6 @@ export class ProductListComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private orderService: OrderService,
     private categoryService: CategoryService,
     private fb: FormBuilder,
     private router: Router
@@ -61,71 +60,17 @@ export class ProductListComponent implements OnInit {
     var categoryAsString = JSON.stringify(this.categorySelectForm.value);
     var split1 = categoryAsString.split(':', 2);
     var split2 = split1[1].split('}', 2);
-    console.log(split2[0]);
     let categoryID = Number(split2[0]);
-    console.log(categoryID);
     if (split2[0] != 'null') {
       this.productService.getFilteredProducts(categoryID).subscribe((res: Products[]) => {
         this.products = res;
       });
     } else {
       this.productService.getAllProducts().subscribe((res: Products[]) => {
-        console.log(res);
         this.products = res;
       });
     }
   }
-
-  // public addProductToCart(productID: number, addForm: NgForm): void {
-  //   if (localStorage.getItem('userId') == null) {
-  //     alert('Please login first to place an order');
-  //     return;
-  //   }
-  //   var countAsString = JSON.stringify(addForm.value);
-  //   var split1 = countAsString.split('qty', 2);
-  //   var split2 = split1[1].split(':', 2);
-  //   var split3 = split2[1].split(',', 2);
-  //   let count = Number(split3[0]);
-
-  //   let tempProduct: Products;
-
-  //   if (localStorage.getItem('orderID') == null) {
-  //     this.orderService.addOrder(this.newOrder).subscribe(res => {
-  //       localStorage.setItem('orderID', res.toString());
-  //       this.products.forEach(element => {
-  //         if (element.id == productID) {
-  //           tempProduct = element;
-  //           let orderID = localStorage.getItem('orderID');
-
-  //           let prevCount = +sessionStorage.getItem(orderID + tempProduct.id.toString());
-  //           let newCount = prevCount + count;
-  //           sessionStorage.setItem(orderID + tempProduct.id.toString(), newCount.toString());
-  //         }
-  //       });
-  //       this.orderService.getOrder(res).subscribe((res: Orders) => {
-  //         this.orderService.addProductToOrder(res.id, tempProduct, count).subscribe(r => {
-  //           this.orderService.viewAllProductsFromOrder(res.id).subscribe((resee: Products[]) => {});
-  //         });
-  //       });
-  //     });
-  //   } else {
-  //     this.orderService.getOrder(Number(localStorage.getItem('orderID'))).subscribe((res: Orders) => {
-  //       this.products.forEach(element => {
-  //         if (element.id == productID) {
-  //           tempProduct = element;
-  //           let orderID = localStorage.getItem('orderID');
-  //           let prevCount = +sessionStorage.getItem(orderID + tempProduct.id.toString());
-  //           let newCount = prevCount + count;
-  //           sessionStorage.setItem(orderID + tempProduct.id.toString(), newCount.toString());
-  //         }
-  //       });
-
-  //       this.orderService.addProductToOrder(res.id, tempProduct, count).subscribe(r => {
-  //         this.orderService.viewAllProductsFromOrder(res.id).subscribe((re: Products[]) => {});
-  //       });
-  //     });
-  //   }
-  // }
 
   public deleteProduct(id: number): void {
     this.productService.deleteProduct(id).subscribe(res => {

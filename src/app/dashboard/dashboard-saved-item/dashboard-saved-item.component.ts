@@ -44,9 +44,6 @@ export class DashboardSavedItemComponent implements OnInit {
     } else {
       this.orderService.getOrder(this.orderID).subscribe((res: Orders) => {
         this.order = res;
-        // if (this.order.productCount == 0) {
-        //   document.getElementById('purchasBtn').= true;
-        // }
         console.log(this.order);
         document.getElementById('fullShoppingCart').style.display = 'inline';
         document.getElementById('emptyShoppingCart').style.display = 'none';

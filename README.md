@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Further help
+## User Roles
 
 There are two user roles in this application an admin and a customer. A customer will not be able to view any data unless an admin adds it.
 
@@ -15,3 +15,7 @@ password: admin
 An admin is a user that can add categories and products into the application, while also being able to edit and delete them. They can also filter items based on their categories, add their own items to a shopping cart and purchase them.
 
 A customer is a user that can add products to their shopping cart, filter through the categories and purchase items.
+
+## Beginning
+
+In order to begin the application the admin must first create at least one category, then add a product. The customer can then log in and add thos products to their shopping cart.
